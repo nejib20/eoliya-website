@@ -213,7 +213,7 @@ export async function sendContactEmail(data: ContactEmailData): Promise<string> 
     const response = await resend.emails.send({
       from: `EOLIYA Contact <${fromEmail}>`,
       to: [toEmail],
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `[Contact Web] ${data.subject}`,
       html: generateContactEmailHTML(data),
       text: generateContactEmailText(data),

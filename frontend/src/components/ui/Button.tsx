@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
@@ -66,13 +68,20 @@ export const Button: React.FC<ButtonProps> = ({
     );
   }
 
+  // Extract only the props we need to avoid type conflicts with framer-motion
+  const { onClick, type, form, name, value } = props;
+
   return (
     <motion.button
       className={combinedClasses}
       disabled={disabled}
+      onClick={onClick}
+      type={type}
+      form={form}
+      name={name}
+      value={value}
       whileHover={!disabled ? { scale: 1.02 } : {}}
       whileTap={!disabled ? { scale: 0.98 } : {}}
-      {...props}
     >
       {content}
     </motion.button>

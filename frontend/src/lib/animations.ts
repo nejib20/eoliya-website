@@ -69,8 +69,11 @@ export const staggerContainerFast: Variants = {
 // Counter animation
 export const counterAnimation: Variants = {
   initial: { opacity: 0, scale: 0.5 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { type: 'spring', stiffness: 100, damping: 10 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 100, damping: 10 }
+  },
 };
 
 // Rotate

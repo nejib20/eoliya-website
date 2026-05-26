@@ -10,6 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
+    "test": "echo \"No tests configured yet\" && exit 0",
     "setup-google": "node scripts/get-google-refresh-token.js"
   },
   "dependencies": {

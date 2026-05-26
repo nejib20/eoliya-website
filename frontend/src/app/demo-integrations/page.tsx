@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Demo Page - Test des intégrations
  * @author Nejib Aloui <nejib20@gmail.com>
