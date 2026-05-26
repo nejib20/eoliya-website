@@ -1,0 +1,43 @@
+{
+  "name": "eoliya-website",
+  "version": "1.0.0",
+  "description": "Site corporate EOLIYA Ingénierie - Bureau d'études, conseil TCE, LED, luminaires",
+  "author": "Nejib Aloui",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "setup-google": "node scripts/get-google-refresh-token.js"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.344.0",
+    "@strapi/blocks-react-renderer": "^1.0.1",
+    "ai": "^3.0.0",
+    "googleapis": "^131.0.0",
+    "openai": "^4.28.0",
+    "resend": "^3.2.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.33",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

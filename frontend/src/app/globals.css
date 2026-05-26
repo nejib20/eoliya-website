@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary - Bleu professionnel */
+  --color-primary-50: #e6f0fa;
+  --color-primary-100: #cce1f5;
+  --color-primary-200: #99c3eb;
+  --color-primary-300: #66a5e1;
+  --color-primary-400: #3387d7;
+  --color-primary-500: #0066CC;
+  --color-primary-600: #0052a3;
+  --color-primary-700: #003d7a;
+  --color-primary-800: #002952;
+  --color-primary-900: #001429;
+
+  /* Secondary - Gris anthracite */
+  --color-secondary-50: #f5f5f6;
+  --color-secondary-100: #ebebed;
+  --color-secondary-200: #d7d7db;
+  --color-secondary-300: #b4b4bc;
+  --color-secondary-400: #8e8e99;
+  --color-secondary-500: #2D3748;
+  --color-secondary-600: #252d3b;
+  --color-secondary-700: #1d232e;
+  --color-secondary-800: #151921;
+  --color-secondary-900: #0d0f14;
+
+  /* Accent - Orange énergie */
+  --color-accent-50: #fff4e6;
+  --color-accent-100: #ffe9cc;
+  --color-accent-200: #ffd399;
+  --color-accent-300: #ffbd66;
+  --color-accent-400: #ffa733;
+  --color-accent-500: #FF8C00;
+  --color-accent-600: #cc7000;
+  --color-accent-700: #995400;
+  --color-accent-800: #663800;
+  --color-accent-900: #331c00;
+
+  /* Neutrals */
+  --color-white: #FFFFFF;
+  --color-gray-50: #F7FAFC;
+  --color-gray-100: #EDF2F7;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E0;
+  --color-gray-400: #A0AEC0;
+  --color-gray-500: #718096;
+  --color-gray-600: #4A5568;
+  --color-gray-700: #2D3748;
+  --color-gray-800: #1A202C;
+  --color-gray-900: #171923;
+  --color-black: #000000;
+
+  /* Status */
+  --color-success: #38A169;
+  --color-warning: #D69E2E;
+  --color-error: #E53E3E;
+  --color-info: #3182CE;
+
+  /* Typography */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+  --transition-slower: 500ms ease;
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-white text-secondary-600 antialiased;
+    font-family: var(--font-family-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-secondary-500 font-bold;
+  }
+
+  h1 {
+    @apply text-5xl leading-tight;
+  }
+
+  h2 {
+    @apply text-4xl leading-snug;
+  }
+
+  h3 {
+    @apply text-3xl leading-snug;
+  }
+
+  h4 {
+    @apply text-2xl leading-normal;
+  }
+
+  h5 {
+    @apply text-xl leading-normal;
+  }
+
+  h6 {
+    @apply text-lg leading-normal;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all duration-200 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-primary-500 border-2 border-primary-500 hover:bg-primary-50;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .card-service {
+    @apply card text-center p-8;
+  }
+
+  .input {
+    @apply w-full px-4 py-3.5 text-base border-2 border-gray-200 rounded-lg transition-all duration-200 bg-white focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-100;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-secondary-600 mb-2;
+  }
+
+  .section {
+    @apply py-20;
+  }
+
+  .section-alt {
+    @apply bg-gray-50;
+  }
+
+  .section-dark {
+    @apply bg-secondary-800 text-white;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Selection colors */
+::selection {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}

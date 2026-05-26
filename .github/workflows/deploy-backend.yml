@@ -1,0 +1,77 @@
+name: Deploy Backend to Railway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy-backend.yml'
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ secrets.RAILWAY_URL }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        run: railway up --service backend
+        working-directory: ./backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Wait for deployment
+        run: sleep 30
+
+      - name: Health check
+        run: |
+          max_attempts=10
+          attempt=0
+          until [ $attempt -ge $max_attempts ]; do
+            if curl -f -s -o /dev/null -w "%{http_code}" "${{ secrets.RAILWAY_URL }}/api/_health" | grep -q "200"; then
+              echo "✅ Backend is healthy"
+              exit 0
+            fi
+            attempt=$((attempt+1))
+            echo "Tentative $attempt/$max_attempts - En attente..."
+            sleep 10
+          done
+          echo "❌ Health check failed"
+          exit 1
+
+      - name: Run database migrations
+        run: railway run npm run strapi migrate
+        working-directory: ./backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Comment deployment URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ Backend déployé avec succès!\n\n🌐 URL: ${{ secrets.RAILWAY_URL }}`
+            })
+
+      - name: Send deployment notification
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Déploiement backend réussi"
+          else
+            echo "❌ Échec du déploiement backend"
+          fi

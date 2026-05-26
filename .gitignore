@@ -48,3 +48,14 @@ coverage/
 # Misc
 *.pem
 .vercel
+
+# Docker
+docker-compose.override.yml
+
+# Backups
+*.sql
+*.tar.gz
+backup-*
+
+# Railway
+.railway/

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SITEMAP TEMPLATE - EOLIYA Ingénierie
+
+  Ce fichier est un TEMPLATE.
+  Le sitemap réel sera généré dynamiquement par Next.js via app/sitemap.ts
+
+  Structure:
+  - Pages statiques (services, expertise, contact)
+  - Pages dynamiques (réalisations, blog articles)
+  - Images sitemap séparé (sitemap-images.xml)
+
+  Priorités:
+  1.0 = Homepage
+  0.9 = Pages services principales
+  0.8 = Réalisations, expertise
+  0.7 = Articles blog
+  0.6 = Pages secondaires
+
+  Changefreq:
+  daily = Blog index, homepage
+  weekly = Services, réalisations
+  monthly = Pages statiques
+  yearly = Mentions légales, CGV
+
+  Documentation Next.js:
+  https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
+-->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://eoliya.com</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Services -->
+  <url>
+    <loc>https://eoliya.com/services/conseil-tce</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://eoliya.com/services/relamping-led</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://eoliya.com/services/luminaires-sur-mesure</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Réalisations (index) -->
+  <url>
+    <loc>https://eoliya.com/realisations</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Réalisations individuelles (exemples - seront générées dynamiquement) -->
+  <url>
+    <loc>https://eoliya.com/realisations/conseil-etat</loc>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://eoliya.com/realisations/conseil-etat/image1.jpg</image:loc>
+      <image:caption>Relamping LED Conseil d'État Paris - 450 luminaires</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Expertise -->
+  <url>
+    <loc>https://eoliya.com/expertise</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog (index) -->
+  <url>
+    <loc>https://eoliya.com/blog</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Articles blog (exemples - seront générés dynamiquement) -->
+  <url>
+    <loc>https://eoliya.com/blog/re2020-eclairage-batiments-tertiaires</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://eoliya.com/blog/relamping-led-economies-roi</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://eoliya.com/contact</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Pages légales -->
+  <url>
+    <loc>https://eoliya.com/mentions-legales</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://eoliya.com/politique-confidentialite</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://eoliya.com/conditions-generales</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

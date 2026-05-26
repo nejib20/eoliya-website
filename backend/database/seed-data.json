@@ -1,0 +1,97 @@
+{
+  "services": [
+    {
+      "titre": "Énergies Renouvelables",
+      "slug": "energies-renouvelables",
+      "description": "Conseil et conception de solutions énergétiques durables",
+      "icone": "solar-panel",
+      "details": "<p>EOLIYA accompagne vos projets d'énergies renouvelables de A à Z : études de faisabilité, conception technique, dimensionnement, et optimisation.</p>",
+      "ordre": 1
+    },
+    {
+      "titre": "Efficacité Énergétique",
+      "slug": "efficacite-energetique",
+      "description": "Optimisation de la performance énergétique des bâtiments et industries",
+      "icone": "energy-efficient",
+      "details": "<p>Réduction de la consommation énergétique par des audits, diagnostics et solutions techniques adaptées.</p>",
+      "ordre": 2
+    },
+    {
+      "titre": "Ingénierie Industrielle",
+      "slug": "ingenierie-industrielle",
+      "description": "Conception et optimisation de processus industriels",
+      "icone": "industry",
+      "details": "<p>Solutions d'ingénierie pour améliorer la productivité et l'efficience de vos installations.</p>",
+      "ordre": 3
+    },
+    {
+      "titre": "Études Techniques",
+      "slug": "etudes-techniques",
+      "description": "Études de faisabilité et dimensionnement de projets",
+      "icone": "blueprint",
+      "details": "<p>Réalisation d'études techniques approfondies pour valider la viabilité de vos projets.</p>",
+      "ordre": 4
+    }
+  ],
+  "projets": [
+    {
+      "titre": "Centrale Photovoltaïque 2MW",
+      "slug": "centrale-photovoltaique-2mw",
+      "client": "EnergieTech SA",
+      "categorie": "energie-renouvelable",
+      "date": "2025-06-15",
+      "description": "Conception et suivi de réalisation d'une centrale solaire de 2MW dans le sud de la France",
+      "contenu": "<p>Projet de grande envergure incluant l'étude de faisabilité, le dimensionnement, et l'accompagnement à la construction.</p>",
+      "featured": true,
+      "localisation": "Marseille, France",
+      "duree": "8 mois",
+      "tags": ["photovoltaïque", "centrale solaire", "2MW"]
+    },
+    {
+      "titre": "Audit Énergétique Industriel",
+      "slug": "audit-energetique-industriel",
+      "client": "Industries Mécaniques du Nord",
+      "categorie": "efficacite-energetique",
+      "date": "2025-03-20",
+      "description": "Audit énergétique complet d'une usine de production avec plan d'optimisation",
+      "contenu": "<p>Réduction de 25% de la consommation énergétique grâce à l'optimisation des équipements et des processus.</p>",
+      "featured": true,
+      "localisation": "Lille, France",
+      "duree": "3 mois",
+      "tags": ["audit énergétique", "industrie", "optimisation"]
+    }
+  ],
+  "team_members": [
+    {
+      "nom": "Aloui",
+      "prenom": "Nejib",
+      "poste": "Ingénieur Énergies Renouvelables",
+      "bio": "Expert en conception de systèmes énergétiques durables avec plus de 10 ans d'expérience",
+      "email": "nejib.aloui@eoliya.fr",
+      "ordre": 1,
+      "specialites": ["Photovoltaïque", "Éolien", "Optimisation énergétique"]
+    }
+  ],
+  "articles": [
+    {
+      "titre": "L'avenir des énergies renouvelables en France",
+      "slug": "avenir-energies-renouvelables-france",
+      "contenu": "<h2>Introduction</h2><p>La transition énergétique en France s'accélère...</p>",
+      "auteur": "Nejib Aloui",
+      "categorie": "actualites",
+      "tags": ["énergies renouvelables", "transition énergétique", "France"],
+      "extrait": "Analyse des perspectives et opportunités pour les énergies renouvelables en France",
+      "tempsLecture": 5
+    }
+  ],
+  "testimonials": [
+    {
+      "nom": "Martin Dupont",
+      "poste": "Directeur Technique",
+      "entreprise": "EnergieTech SA",
+      "texte": "EOLIYA a réalisé un travail exceptionnel sur notre projet de centrale photovoltaïque. Leur expertise technique et leur accompagnement ont été précieux.",
+      "rating": 5,
+      "featured": true
+    }
+  ]
+}

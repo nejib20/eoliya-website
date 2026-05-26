@@ -1,0 +1,132 @@
+# robots.txt - EOLIYA Ingénierie
+# Site: eoliya.com
+# Généré: Mai 2026
+
+# Configuration principale pour tous les robots
+User-agent: *
+Allow: /
+
+# Pages et ressources à autoriser explicitement
+Allow: /services/
+Allow: /realisations/
+Allow: /expertise/
+Allow: /blog/
+Allow: /contact/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.pdf$
+
+# Pages à ne pas indexer
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /private/
+Disallow: /test/
+Disallow: /dev/
+Disallow: /brouillons/
+Disallow: /*?*utm_source=
+Disallow: /*?*utm_medium=
+Disallow: /*?*utm_campaign=
+Disallow: /recherche?
+Disallow: /search?
+Disallow: /merci
+Disallow: /thank-you
+
+# Fichiers système à ne pas crawler
+Disallow: /*.json$
+Disallow: /package.json
+Disallow: /tsconfig.json
+Disallow: /.env*
+Disallow: /*.log$
+
+# Configuration spécifique Google
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Configuration spécifique Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Robots SEO spécialisés
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: SEMrushBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Blocage bots abusifs et scraping
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AspiegelBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://eoliya.com/sitemap.xml
+Sitemap: https://eoliya.com/sitemap-blog.xml
+Sitemap: https://eoliya.com/sitemap-images.xml
+
+# Notes:
+# - Ce fichier sera déployé à la racine du domaine (https://eoliya.com/robots.txt)
+# - Les sitemaps seront générés dynamiquement par l'application Next.js
+# - Vérifier régulièrement avec Google Search Console
+# - Mettre à jour si ajout de nouvelles sections à bloquer/autoriser
