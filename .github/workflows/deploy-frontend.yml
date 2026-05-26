@@ -1,13 +1,15 @@
 name: Deploy Frontend to Vercel
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'frontend/**'
-      - '.github/workflows/deploy-frontend.yml'
-
+  # Déploiement manuel uniquement (secrets Vercel requis)
   workflow_dispatch:
+
+  # Décommenter une fois les secrets configurés:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'frontend/**'
+  #     - '.github/workflows/deploy-frontend.yml'
 
 jobs:
   deploy:

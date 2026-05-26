@@ -1,13 +1,15 @@
 name: Deploy Backend to Railway
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'backend/**'
-      - '.github/workflows/deploy-backend.yml'
-
+  # Déploiement manuel uniquement (secrets Railway requis)
   workflow_dispatch:
+
+  # Décommenter une fois les secrets configurés:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'backend/**'
+  #     - '.github/workflows/deploy-backend.yml'
 
 jobs:
   deploy:
