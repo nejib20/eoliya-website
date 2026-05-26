@@ -77,11 +77,5 @@
       "destination": "/api/:path*"
     }
   ],
-  "regions": ["cdg1"],
-  "functions": {
-    "api/**/*.ts": {
-      "maxDuration": 10
-    }
-  },
-  "crons": []
+  "regions": ["cdg1"]
 }
