@@ -77,15 +77,6 @@
       "destination": "/api/:path*"
     }
   ],
-  "env": {
-    "NEXT_PUBLIC_STRAPI_URL": "@strapi-url",
-    "NEXT_PUBLIC_SITE_URL": "@site-url",
-    "NEXT_PUBLIC_GA_ID": "@ga-id",
-    "OPENAI_API_KEY": "@openai-key",
-    "GOOGLE_CALENDAR_CLIENT_ID": "@google-calendar-client-id",
-    "GOOGLE_CALENDAR_CLIENT_SECRET": "@google-calendar-client-secret",
-    "GOOGLE_CALENDAR_REDIRECT_URI": "@google-calendar-redirect-uri"
-  },
   "regions": ["cdg1"],
   "functions": {
     "api/**/*.ts": {
