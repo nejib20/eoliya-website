@@ -15,7 +15,14 @@ interface NavLink {
 
 const navigation: NavLink[] = [
   { label: 'Accueil', href: '/' },
-  { label: 'À propos', href: '/a-propos' },
+  {
+    label: 'À propos',
+    href: '/a-propos',
+    children: [
+      { label: 'Notre histoire', href: '/a-propos' },
+      { label: 'Notre équipe', href: '/equipe' },
+    ],
+  },
   {
     label: 'Services',
     href: '/services',

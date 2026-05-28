@@ -12,6 +12,7 @@ const services = [
 const links = [
   { label: 'Accueil', href: '/' },
   { label: 'À propos', href: '/a-propos' },
+  { label: 'Notre équipe', href: '/equipe' },
   { label: 'Projets', href: '/projets' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },

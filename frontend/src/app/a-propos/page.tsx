@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Hero, Clients } from '@/components/sections';
+import { Hero, Clients, Team } from '@/components/sections';
 import { CheckCircle, Target, Users, Award } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -196,6 +196,13 @@ export default function AProposPage() {
 
       {/* Clients */}
       <Clients />
+
+      {/* Team Preview */}
+      <Team
+        title="L'équipe qui vous accompagne"
+        subtitle="Des experts passionnés au service de vos projets"
+        variant="preview"
+      />
 
       {/* CTA */}
       <section className="section bg-gradient-to-br from-primary-500 to-primary-700 text-white">
