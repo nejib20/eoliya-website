@@ -2,15 +2,25 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Hero } from '@/components/sections';
 import { Ruler, Shield, Cog, Award } from 'lucide-react';
+import { StructuredData } from '@/components/seo';
+import { serviceSchemas, generateBreadcrumbSchema } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   title: 'Luminaires sur mesure - Conception et fabrication | EOLIYA',
   description: 'Conception et fabrication de luminaires techniques sur mesure. Calculs photométriques, conformité normes NFC 71-121, EN 12464, solutions ATEX.',
 };
 
+const breadcrumb = generateBreadcrumbSchema([
+  { name: 'Accueil', url: 'https://eoliya.com' },
+  { name: 'Services', url: 'https://eoliya.com/services' },
+  { name: 'Luminaires sur mesure', url: 'https://eoliya.com/services/luminaires-sur-mesure' },
+]);
+
 export default function LuminairesSurMesurePage() {
   return (
     <>
+      <StructuredData data={[serviceSchemas.luminairesSurMesure, breadcrumb]} />
+
       <Hero
         title="Luminaires sur mesure"
         subtitle="Conception et fabrication de solutions d'éclairage techniques adaptées à vos contraintes architecturales et normatives spécifiques."

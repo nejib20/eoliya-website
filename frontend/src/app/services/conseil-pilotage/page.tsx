@@ -2,15 +2,25 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Hero } from '@/components/sections';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+import { StructuredData } from '@/components/seo';
+import { serviceSchemas, generateBreadcrumbSchema } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   title: 'Conseil et Pilotage TCE - Maîtrise d\'œuvre d\'exécution | EOLIYA',
   description: 'Service de conseil TCE et pilotage de projets de construction, rénovation et aménagement. Coordination des corps d\'état, mise aux normes PMR et sécurité incendie.',
 };
 
+const breadcrumb = generateBreadcrumbSchema([
+  { name: 'Accueil', url: 'https://eoliya.com' },
+  { name: 'Services', url: 'https://eoliya.com/services' },
+  { name: 'Conseil et Pilotage TCE', url: 'https://eoliya.com/services/conseil-pilotage' },
+]);
+
 export default function ConseilPilotagePage() {
   return (
     <>
+      <StructuredData data={[serviceSchemas.conseilPilotage, breadcrumb]} />
+
       <Hero
         title="Conseil et Pilotage TCE"
         subtitle="Maîtrise d'œuvre d'exécution pour vos projets de construction, rénovation et aménagement. Coordination complète des intervenants et suivi budgétaire."

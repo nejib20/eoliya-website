@@ -1,15 +1,24 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Contact } from '@/components/sections';
+import { StructuredData } from '@/components/seo';
+import { faqSchema, localBusinessSchema, generateBreadcrumbSchema } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   title: 'Contact EOLIYA Ingénierie - Devis gratuit et conseil personnalisé | Paris',
   description: 'Contactez EOLIYA Ingénierie pour votre projet d\'ingénierie du bâtiment. Devis gratuit, conseil TCE, relamping LED, luminaires sur mesure. Réponse sous 24h.',
 };
 
+const contactBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Accueil', url: 'https://eoliya.com' },
+  { name: 'Contact', url: 'https://eoliya.com/contact' },
+]);
+
 export default function ContactPage() {
   return (
     <>
+      <StructuredData data={[faqSchema, contactBreadcrumb]} />
+
       {/* Hero simple */}
       <section className="pt-32 pb-12 bg-gradient-to-br from-gray-50 to-white">
         <div className="container-custom text-center">

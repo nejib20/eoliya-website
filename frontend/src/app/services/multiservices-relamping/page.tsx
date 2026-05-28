@@ -2,15 +2,25 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Hero } from '@/components/sections';
 import { Zap, Wrench, TrendingDown, Clock } from 'lucide-react';
+import { StructuredData } from '@/components/seo';
+import { serviceSchemas, generateBreadcrumbSchema } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   title: 'Multi-services et Relamping LED - Maintenance et transition énergétique | EOLIYA',
   description: 'Maintenance électrique, dépannage 24/7 et solutions de relamping LED haute performance. Jusqu\'à 80% d\'économies d\'énergie garanties.',
 };
 
+const breadcrumb = generateBreadcrumbSchema([
+  { name: 'Accueil', url: 'https://eoliya.com' },
+  { name: 'Services', url: 'https://eoliya.com/services' },
+  { name: 'Relamping LED', url: 'https://eoliya.com/services/multiservices-relamping' },
+]);
+
 export default function MultiservicesRelampingPage() {
   return (
     <>
+      <StructuredData data={[serviceSchemas.relampingLed, breadcrumb]} />
+
       <Hero
         title="Multi-services, Multi-techniques et Relamping"
         subtitle="Maintenance corrective et préventive de vos installations électriques, CVC et systèmes de sécurité. Accompagnement complet vers la transition énergétique LED."

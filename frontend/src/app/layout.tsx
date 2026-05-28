@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header, Footer } from '@/components/layout';
+import { StructuredData } from '@/components/seo';
+import { globalSchemas } from '@/lib/structured-data';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -62,6 +64,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.variable}>
+      <head>
+        <StructuredData data={globalSchemas} />
+      </head>
       <body className="antialiased">
         <Header />
         <main className="min-h-screen">
