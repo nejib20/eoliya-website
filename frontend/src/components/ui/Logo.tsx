@@ -11,21 +11,22 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'full',
   color = 'dark',
 }) => {
+  // Couleurs selon la charte graphique EOLIYA
   const colors = {
     dark: {
-      primary: '#1a365d', // Dark blue
-      secondary: '#2d3748',
-      accent: '#4a5568',
+      text: '#1a365d', // Navy blue pour le texte
+      ring: ['#9ca3af', '#d1d5db', '#6b7280'], // Dégradé gris métallisé pour le O
+      subtitle: '#6b7280',
     },
     light: {
-      primary: '#ffffff',
-      secondary: '#e2e8f0',
-      accent: '#cbd5e0',
+      text: '#ffffff',
+      ring: ['#e5e7eb', '#f3f4f6', '#d1d5db'],
+      subtitle: '#d1d5db',
     },
     primary: {
-      primary: '#0066CC',
-      secondary: '#2d3748',
-      accent: '#4a5568',
+      text: '#003366',
+      ring: ['#9ca3af', '#d1d5db', '#6b7280'],
+      subtitle: '#6b7280',
     },
   };
 
@@ -40,9 +41,15 @@ export const Logo: React.FC<LogoProps> = ({
         className={className}
         aria-label="EOLIYA"
       >
-        {/* The distinctive O circle */}
-        <circle cx="30" cy="30" r="25" stroke={c.primary} strokeWidth="5" fill="none" />
-        <circle cx="30" cy="30" r="8" fill={c.primary} />
+        <defs>
+          <linearGradient id="ring-gradient-icon" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={c.ring[0]} />
+            <stop offset="50%" stopColor={c.ring[1]} />
+            <stop offset="100%" stopColor={c.ring[2]} />
+          </linearGradient>
+        </defs>
+        {/* Anneau métallisé style plaquette */}
+        <circle cx="30" cy="30" r="22" stroke="url(#ring-gradient-icon)" strokeWidth="6" fill="none" />
       </svg>
     );
   }
@@ -56,15 +63,14 @@ export const Logo: React.FC<LogoProps> = ({
         className={className}
         aria-label="EOLIYA Ingénierie"
       >
-        {/* EOLIYA text */}
         <text
           x="0"
           y="32"
           fontFamily="Inter, system-ui, sans-serif"
           fontSize="36"
-          fontWeight="700"
-          letterSpacing="2"
-          fill={c.primary}
+          fontWeight="600"
+          letterSpacing="3"
+          fill={c.text}
         >
           EOLIYA
         </text>
@@ -72,56 +78,68 @@ export const Logo: React.FC<LogoProps> = ({
     );
   }
 
-  // Full logo with distinctive O
+  // Logo complet avec O anneau métallisé - style plaquette EOLIYA
   return (
     <svg
-      viewBox="0 0 220 60"
+      viewBox="0 0 180 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="EOLIYA Ingénierie"
     >
+      <defs>
+        <linearGradient id={`ring-gradient-${color}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c.ring[0]} />
+          <stop offset="45%" stopColor={c.ring[1]} />
+          <stop offset="100%" stopColor={c.ring[2]} />
+        </linearGradient>
+      </defs>
+
       {/* E */}
       <text
         x="0"
-        y="38"
+        y="30"
         fontFamily="Inter, system-ui, sans-serif"
-        fontSize="38"
-        fontWeight="700"
-        letterSpacing="1"
-        fill={c.primary}
+        fontSize="28"
+        fontWeight="600"
+        letterSpacing="2"
+        fill={c.text}
       >
         E
       </text>
 
-      {/* O - The distinctive circle */}
-      <g transform="translate(28, 19)">
-        <circle cx="11" cy="11" r="11" stroke={c.primary} strokeWidth="3.5" fill="none" />
-        <circle cx="11" cy="11" r="3.5" fill={c.primary} />
-      </g>
+      {/* O - Anneau métallisé (signature visuelle EOLIYA) */}
+      <circle
+        cx="32"
+        cy="20"
+        r="10"
+        stroke={`url(#ring-gradient-${color})`}
+        strokeWidth="3.5"
+        fill="none"
+      />
 
       {/* LIYA */}
       <text
-        x="52"
-        y="38"
+        x="48"
+        y="30"
         fontFamily="Inter, system-ui, sans-serif"
-        fontSize="38"
-        fontWeight="700"
-        letterSpacing="1"
-        fill={c.primary}
+        fontSize="28"
+        fontWeight="600"
+        letterSpacing="2"
+        fill={c.text}
       >
         LIYA
       </text>
 
-      {/* INGENIERIE - spaced letters */}
+      {/* INGENIERIE - lettres espacées */}
       <text
-        x="2"
-        y="55"
+        x="1"
+        y="45"
         fontFamily="Inter, system-ui, sans-serif"
-        fontSize="11"
-        fontWeight="500"
-        letterSpacing="5.5"
-        fill={c.accent}
+        fontSize="9"
+        fontWeight="400"
+        letterSpacing="6"
+        fill={c.subtitle}
       >
         INGENIERIE
       </text>
