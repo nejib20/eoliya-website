@@ -13,17 +13,24 @@ interface ClientsProps {
   clients?: Client[];
 }
 
+// All 16 clients from the plaquette "ILS NOUS FONT CONFIANCE"
 const defaultClients: Client[] = [
-  { name: 'Conseil d\'État' },
+  { name: "Conseil d'État" },
   { name: 'Veepee' },
   { name: 'Barrière' },
   { name: 'Dentsu Group' },
-  { name: 'TTI Fayat' },
-  { name: 'Vinci Energies' },
+  { name: 'TTI FAYAT' },
+  { name: 'Weetec' },
+  { name: 'VINCI Energies' },
+  { name: 'France' },
   { name: 'Institut de France' },
-  { name: 'E.Leclerc' },
+  { name: 'FINSECUR' },
+  { name: 'SDEL' },
+  { name: 'PHIBOR Entreprises' },
+  { name: 'GUINIER SAS' },
+  { name: 'FICHET' },
   { name: 'Azureva' },
-  { name: 'Fichet' },
+  { name: 'E.Leclerc' },
 ];
 
 export const Clients: React.FC<ClientsProps> = ({
@@ -54,7 +61,7 @@ export const Clients: React.FC<ClientsProps> = ({
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center"
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 items-center"
         >
           {clients.map((client, index) => (
             <motion.div

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
+import { Logo } from '@/components/ui';
 
 const services = [
   { label: 'Conseil et Pilotage TCE', href: '/services/conseil-pilotage' },
@@ -31,9 +32,8 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1: Logo & Description */}
           <div>
-            <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-primary-400">EOLIYA</span>
-              <span className="ml-2 text-lg text-gray-300">Ingénierie</span>
+            <div className="mb-4">
+              <Logo className="h-12 w-auto" color="light" />
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Expert en ingénierie du bâtiment depuis 15 ans. Bureau d'études, conseil TCE, relamping LED et luminaires sur mesure.

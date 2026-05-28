@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui';
+import { Button, Logo } from '@/components/ui';
 
 interface NavLink {
   label: string;
@@ -67,8 +67,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center focus-visible-ring">
-            <span className="text-2xl font-bold text-primary-500">EOLIYA</span>
-            <span className="ml-2 text-lg text-secondary-500">Ingénierie</span>
+            <Logo className="h-12 w-auto" color="dark" />
           </Link>
 
           {/* Desktop Navigation */}

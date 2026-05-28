@@ -6,3 +6,6 @@ export type { CardProps } from './Card';
 
 export { Input, Textarea, Select } from './Input';
 export type { InputProps, TextareaProps, SelectProps } from './Input';
+
+export { Logo } from './Logo';
+export type { default as LogoProps } from './Logo';
