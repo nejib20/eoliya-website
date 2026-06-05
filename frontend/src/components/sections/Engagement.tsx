@@ -27,8 +27,9 @@ const points: Point[] = [
 export const Engagement: React.FC = () => {
   return (
     <section className="engage" id="engagement">
-      <div className="wrap grid">
-        <div className="left rv">
+      <div className="wrap">
+        <div className="grid">
+          <div className="left rv">
           <div className="eyebrow"><b>01</b> &nbsp;Notre engagement</div>
           <h2>Au service de vos projets depuis 2009.</h2>
           <p>
@@ -59,6 +60,7 @@ export const Engagement: React.FC = () => {
               </div>
             </div>
           ))}
+          </div>
         </div>
 
         <figure className="engage-figure rv">

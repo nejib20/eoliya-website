@@ -759,8 +759,9 @@
 @media (max-width: 600px) { .ref-grid { grid-template-columns: repeat(2,1fr); } }
 
 /* Engagement (éditorial 2 colonnes) */
-.engage .grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px,5vw,90px); padding-block: clamp(72px,9vw,140px); align-items: start; }
-.engage .left { position: sticky; top: 110px; }
+.engage .wrap { padding-block: clamp(72px,9vw,140px); }
+.engage .grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(36px,5vw,90px); align-items: start; }
+.engage .left { position: sticky; top: 110px; align-self: start; }
 .engage .left .eyebrow { margin-bottom: 26px; }
 .engage .left h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(30px,3.6vw,52px); line-height: 1.04; letter-spacing: -0.02em; color: var(--ink); }
 .engage .left p { margin-top: 26px; max-width: 40ch; color: var(--ink-2); font-size: 16.5px; }
@@ -773,7 +774,7 @@
 .engage .points .pt .pidx { font-family: var(--font-mono); font-size: 13px; color: var(--light-deep); padding-top: 6px; }
 .engage .points .pt h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(21px,2.2vw,28px); letter-spacing: -0.01em; color: var(--ink); }
 .engage .points .pt p { margin-top: 12px; color: var(--muted); font-size: 15.5px; max-width: 52ch; }
-.engage-figure { grid-column: 1 / -1; margin: clamp(20px,3vw,44px) 0 0; }
+.engage-figure { margin-top: clamp(36px,5vw,64px); }
 .engage-figure img { display: block; width: 100%; height: clamp(300px, 40vw, 580px); object-fit: cover; box-shadow: 0 30px 80px rgba(12,14,18,0.22); }
 .engage-figure figcaption { margin-top: 18px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; }
 .engage-figure figcaption::before { content:""; width: 26px; height: 1px; background: var(--light); display: inline-block; }
