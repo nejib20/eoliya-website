@@ -2,72 +2,15 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CTABand } from '@/components/sections';
+import { articles } from '@/data/articles';
 
 export const metadata: Metadata = {
-  title: 'Blog — EOLIYA Ingenierie | Le journal d\'EOLIYA',
-  description: 'Regards d\'experts sur l\'ingenierie du batiment, la transition energetique et la vie de nos chantiers.',
+  title: 'Blog — EOLIYA Ingénierie | Le journal d\'EOLIYA',
+  description:
+    'Regards d\'experts sur l\'ingénierie du bâtiment, la transition énergétique et la vie de nos chantiers.',
 };
 
-interface Article {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-}
-
-const featuredArticle: Article = {
-  slug: 'decret-tertiaire',
-  title: 'Decret tertiaire : transformer une obligation en economies',
-  excerpt: '40% de consommation en moins d\'ici 2030. Derriere la contrainte reglementaire se cachent des leviers tres concrets, du relamping LED au pilotage technique, pour reduire la facture sans tout reconstruire.',
-  category: 'Transition energetique',
-  date: '28 mai 2026',
-  readTime: '3 min de lecture',
-};
-
-const articles: Article[] = [
-  {
-    slug: 'relamping-led',
-    title: 'Relamping LED : bien plus qu\'un changement d\'ampoule',
-    excerpt: 'Le relamping ne se resume pas a remplacer des sources. Pense comme un projet, il combine economies d\'energie, confort visuel et maintenance allegee sur la duree.',
-    category: 'Eclairage',
-    date: '14 mai 2026',
-    readTime: '3 min',
-  },
-  {
-    slug: 'decret-bacs',
-    title: 'Decret BACS : pourquoi piloter, c\'est deja economiser',
-    excerpt: 'La GTB devient obligatoire par paliers de puissance. Au-dela de la conformite, automatiser le chauffage, la ventilation et l\'eclairage fait baisser la consommation des la premiere annee.',
-    category: 'Pilotage',
-    date: '2 mai 2026',
-    readTime: '3 min',
-  },
-  {
-    slug: 'renovation-site-occupe',
-    title: 'Renover un site tertiaire sans interrompre l\'activite',
-    excerpt: 'Travailler en site occupe impose un phasage millimetre. Un interlocuteur unique et une coordination tous corps d\'etat evitent les arrets d\'exploitation.',
-    category: 'Renovation',
-    date: '22 avril 2026',
-    readTime: '2 min',
-  },
-  {
-    slug: 'space-planning',
-    title: 'Space planning : amenager pour la performance et le bien-etre',
-    excerpt: 'Densite, acoustique, lumiere, flexibilite. L\'agencement d\'un espace de travail se concoit comme un systeme ou chaque metre carre sert l\'usage et le confort.',
-    category: 'Amenagement',
-    date: '9 avril 2026',
-    readTime: '2 min',
-  },
-  {
-    slug: 'equipement-medical',
-    title: 'Equipement medical : concevoir des espaces de sante conformes',
-    excerpt: 'Hygiene, fluides, normes electriques, ergonomie des soins. L\'installation d\'equipements de sante conjugue exigences techniques et realite du terrain.',
-    category: 'Sante',
-    date: '27 mars 2026',
-    readTime: '3 min',
-  },
-];
+const [featuredArticle, ...gridArticles] = articles;
 
 export default function BlogPage() {
   return (
@@ -75,22 +18,22 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
         <div className="wrap">
-          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
+          <div className="flex items-center gap-2 text-sm text-muted mb-[22px] rv">
             <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-ink">Blog</span>
           </div>
 
-          <div className="eyebrow mb-[22px]">
+          <div className="eyebrow mb-[22px] rv">
             <b>04</b> &nbsp;Blog
           </div>
 
-          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em]">
+          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em] rv d1">
             Le journal <em className="italic text-laiton-deep">d&apos;EOLIYA</em>.
           </h1>
 
-          <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[60ch]">
-            Regards d&apos;experts sur l&apos;ingenierie du batiment, la transition energetique et la vie de nos chantiers.
+          <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[60ch] rv d2">
+            Regards d&apos;experts sur l&apos;ingénierie du bâtiment, la transition énergétique et la vie de nos chantiers.
           </p>
         </div>
       </section>
@@ -100,10 +43,13 @@ export default function BlogPage() {
         <div className="wrap">
           <Link
             href={`/blog/${featuredArticle.slug}`}
-            className="grid grid-cols-[auto_1fr] max-md:grid-cols-1 gap-[clamp(28px,5vw,72px)] items-start group"
+            className="grid grid-cols-[auto_1fr] max-md:grid-cols-1 gap-[clamp(28px,5vw,72px)] items-start group rv"
           >
-            <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-laiton-deep writing-mode-vertical-rl transform rotate-180 self-stretch pt-1 max-md:writing-mode-horizontal max-md:transform-none">
-              A la une
+            <div
+              className="font-mono text-[11px] tracking-[0.18em] uppercase text-laiton-deep self-stretch pt-1 max-md:[writing-mode:horizontal-tb] max-md:transform-none"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            >
+              À la une
             </div>
             <div>
               <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-laiton-deep">
@@ -130,8 +76,8 @@ export default function BlogPage() {
       {/* Articles Grid */}
       <section className="py-[clamp(16px,3vw,40px)] pb-[clamp(48px,6vw,96px)]">
         <div className="wrap">
-          <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
-            {articles.map((article) => (
+          <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 rv">
+            {gridArticles.map((article) => (
               <Link
                 key={article.slug}
                 href={`/blog/${article.slug}`}
@@ -149,7 +95,7 @@ export default function BlogPage() {
                 </p>
                 <div className="mt-[22px] flex items-center justify-between gap-3">
                   <span className="font-mono text-[10.5px] tracking-[0.05em] text-faint">
-                    {article.date} · {article.readTime}
+                    {article.date} · {article.readTimeShort}
                   </span>
                   <span className="font-mono text-[15px] text-laiton-deep opacity-0 -translate-x-1.5 transition-all duration-[350ms] ease-editorial group-hover:opacity-100 group-hover:translate-x-0">
                     →
@@ -164,7 +110,7 @@ export default function BlogPage() {
       {/* CTA */}
       <CTABand
         eyebrow="Une question technique ?"
-        title="Nos ingenieurs vous repondent."
+        title="Nos ingénieurs vous répondent."
         primaryCta={{
           label: 'Poser une question',
           href: '/contact',
