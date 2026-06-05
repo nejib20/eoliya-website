@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 interface Capacity {
   index: string;
@@ -10,153 +9,138 @@ interface Capacity {
   description: string;
   href: string;
   image: string;
-}
-
-interface MousePosition {
-  x: number;
-  y: number;
+  note: string;
 }
 
 const capacities: Capacity[] = [
   {
     index: '01',
     title: 'Conseil & Pilotage TCE',
-    description: 'Maitrise d\'oeuvre d\'execution et coordination tous corps d\'etat de vos projets de construction, renovation ou amenagement.',
+    description: 'Maîtrise d’œuvre d’exécution et coordination tous corps d’état de vos projets de construction, rénovation ou aménagement.',
     href: '/services/conseil-pilotage',
-    image: '/images/services/pilotage-projet.jpg',
+    image: '/images/services/svc-tce.png',
+    note: 'Chantier TCE, coordination de corps d’état',
   },
   {
     index: '02',
     title: 'Multi-services & Relamping',
-    description: 'Maintenance, depannage et transition LED pour optimiser vos consommations energetiques jusqu\'a 80%.',
+    description: 'Maintenance, dépannage et transition LED pour optimiser vos consommations énergétiques jusqu’à 80%.',
     href: '/services/multiservices-relamping',
-    image: '/images/services/medical.jpg',
+    image: '/images/services/svc-relamping.jpeg',
+    note: 'Relamping LED, plafond tertiaire',
   },
   {
     index: '03',
     title: 'Luminaires sur mesure',
-    description: 'Conception et fabrication de solutions d\'eclairage techniques adaptees a vos contraintes architecturales et normatives.',
+    description: 'Conception et fabrication de solutions d’éclairage techniques adaptées à vos contraintes architecturales et normatives.',
     href: '/services/luminaires-sur-mesure',
-    image: '/images/services/conseil-pilotage.jpg',
+    image: '/images/services/svc-luminaire.jpg',
+    note: 'Luminaire sur mesure, atelier',
   },
   {
     index: '04',
-    title: 'Renovation & second oeuvre',
-    description: 'Renovation complete de bureaux et locaux : peinture, parquet, carrelage, creation de sanitaires et gros oeuvre, avec un seul interlocuteur de l\'etude a la livraison.',
+    title: 'Rénovation & second œuvre',
+    description: 'Rénovation complète de bureaux et locaux : peinture, parquet, carrelage, création de sanitaires et gros œuvre, avec un seul interlocuteur de l’étude à la livraison.',
     href: '/services#svc-renovation',
-    image: '/images/services/relamping.jpg',
+    image: '/images/services/svc-renovation.jpg',
+    note: 'Rénovation, parquet à chevrons',
   },
   {
     index: '05',
-    title: 'Amenagement & space planning',
-    description: 'Optimisation et agencement de vos espaces : space planning, cloisonnement, amenagement de bureaux et d\'appartements, pour des lieux fonctionnels et valorises.',
+    title: 'Aménagement & space planning',
+    description: 'Optimisation et agencement de vos espaces : space planning, cloisonnement, aménagement de bureaux et d’appartements, pour des lieux fonctionnels et valorisés.',
     href: '/services#svc-amenagement',
-    image: '/images/services/renovation.jpg',
+    image: '/images/services/svc-amenagement.jpg',
+    note: 'Aménagement, space planning',
   },
   {
     index: '06',
-    title: 'Equipement medical',
-    description: 'Vente et installation d\'equipements medicaux pour hopitaux et cliniques, dans le respect des normes et des contraintes specifiques aux etablissements de sante.',
+    title: 'Équipement médical',
+    description: 'Vente et installation d’équipements médicaux pour hôpitaux et cliniques, dans le respect des normes et des contraintes spécifiques aux établissements de santé.',
     href: '/services#svc-medical',
-    image: '/images/services/luminaires.jpg',
+    image: '/images/services/svc-medical.jpg',
+    note: 'Salle de soin, équipement médical',
   },
 ];
 
 export const Capacities: React.FC = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
+  const rowsRef = useRef<HTMLDivElement>(null);
 
-  // Track mouse position relative to viewport
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!containerRef.current) return;
+  // Image flottante qui suit le curseur (position: fixed + lerp), fidèle à la référence.
+  useEffect(() => {
+    const reveal = revealRef.current;
+    const rowsWrap = rowsRef.current;
+    if (!reveal || !rowsWrap) return;
+    if (!window.matchMedia('(min-width: 901px)').matches) return;
 
-    const rect = containerRef.current.getBoundingClientRect();
-    // Calculate mouse position as percentage within the container
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
+    const rows = Array.from(rowsWrap.querySelectorAll<HTMLElement>('[data-cap]'));
+    const layers = Array.from(reveal.querySelectorAll<HTMLElement>('.cr-img'));
+    let raf = 0;
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    let active = false;
 
-    setMousePosition({ x, y });
+    const loop = () => {
+      cx += (tx - cx) * 0.16;
+      cy += (ty - cy) * 0.16;
+      reveal.style.left = cx + 'px';
+      reveal.style.top = cy + 'px';
+      if (active) raf = requestAnimationFrame(loop);
+    };
+
+    const cleanups: Array<() => void> = [];
+    rows.forEach((row) => {
+      const id = row.getAttribute('data-cap');
+      const onEnter = () => {
+        layers.forEach((l) => l.classList.toggle('on', l.getAttribute('data-cap') === id));
+        reveal.classList.add('show');
+        active = true;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(loop);
+      };
+      const onMove = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY; };
+      const onLeave = () => { reveal.classList.remove('show'); active = false; cancelAnimationFrame(raf); };
+      row.addEventListener('pointerenter', onEnter);
+      row.addEventListener('pointermove', onMove);
+      row.addEventListener('pointerleave', onLeave);
+      cleanups.push(() => {
+        row.removeEventListener('pointerenter', onEnter);
+        row.removeEventListener('pointermove', onMove);
+        row.removeEventListener('pointerleave', onLeave);
+      });
+    });
+
+    return () => { cancelAnimationFrame(raf); cleanups.forEach((c) => c()); };
   }, []);
-
-  // Calculate image container transform based on mouse position
-  // The image follows the cursor within its movement range
-  const getImageTransform = () => {
-    // Movement range: image can move within a zone (larger values = more pronounced effect)
-    const maxMoveX = 120; // Max horizontal movement in pixels
-    const maxMoveY = 80; // Max vertical movement in pixels
-
-    // Calculate offset from center (mouse position 0-1 maps to -1 to 1)
-    const offsetX = (mousePosition.x - 0.5) * 2 * maxMoveX;
-    const offsetY = (mousePosition.y - 0.5) * 2 * maxMoveY;
-
-    return `translate(${offsetX}px, ${offsetY}px)`;
-  };
 
   return (
     <section className="border-t border-line" id="services">
       <div className="wrap">
         {/* Header */}
         <div className="flex justify-between items-end py-[clamp(40px,5vw,64px)] pb-[clamp(20px,2.5vw,30px)] gap-[30px] flex-wrap">
-          <h2 className="font-display font-medium text-[clamp(28px,3.4vw,46px)] tracking-[-0.02em] max-w-[16ch]">
+          <h2 className="rv font-display font-medium text-[clamp(28px,3.4vw,46px)] tracking-[-0.02em] max-w-[16ch]">
             <span className="idx text-[0.55em] align-[0.6em]">02 · </span>
             Nos domaines d&apos;intervention
           </h2>
-          <p className="max-w-[38ch] text-muted text-[15.5px]">
-            Six metiers complementaires pour concevoir, piloter et optimiser l&apos;ensemble de vos projets d&apos;ingenierie du batiment.
+          <p className="rv d1 max-w-[38ch] text-muted text-[15.5px]">
+            Six métiers complémentaires pour concevoir, piloter et optimiser l&apos;ensemble de vos projets d&apos;ingénierie du bâtiment.
           </p>
         </div>
 
-        {/* List with hover image */}
-        <div
-          ref={containerRef}
-          className="relative"
-          onMouseMove={handleMouseMove}
-        >
-          {/* Hover Image - floats and follows cursor */}
-          <div
-            className="hidden lg:block absolute right-[40px] top-0 w-[380px] h-[280px] overflow-hidden pointer-events-none z-50"
-            style={{
-              opacity: hoveredIndex !== null ? 1 : 0,
-              top: hoveredIndex !== null ? `${(hoveredIndex * 120) + 40}px` : '40px',
-              transform: getImageTransform(),
-              transition: 'opacity 0.4s ease, top 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.33, 1, 0.68, 1)'
-            }}
-          >
-            {capacities.map((cap, index) => (
-              <div
-                key={cap.index}
-                className="absolute inset-0"
-                style={{
-                  opacity: hoveredIndex === index ? 1 : 0,
-                  transition: 'opacity 0.4s ease'
-                }}
-              >
-                <Image
-                  src={cap.image}
-                  alt={cap.title}
-                  fill
-                  className="object-cover"
-                  sizes="380px"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Service items */}
+        {/* List */}
+        <div ref={rowsRef} className="relative">
           {capacities.map((cap, index) => (
             <Link
               key={cap.index}
               href={cap.href}
-              className="group grid grid-cols-[64px_1fr_auto] max-md:grid-cols-[40px_1fr_auto] items-center gap-[clamp(20px,3vw,48px)] py-[clamp(28px,3vw,42px)] px-1 border-t border-line relative cursor-pointer transition-[padding-left,background-color] duration-500 ease-editorial hover:pl-[22px] hover:bg-card/50 last:border-b"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              data-cap={index + 1}
+              className="rv group grid grid-cols-[64px_1fr_auto] max-md:grid-cols-[40px_1fr_auto] items-center gap-[clamp(20px,3vw,48px)] py-[clamp(28px,3vw,42px)] px-1 border-t border-line relative cursor-pointer transition-[padding-left] duration-500 ease-editorial hover:pl-[22px] last:border-b"
             >
               <div className="font-mono text-[13px] text-laiton-deep tracking-[0.05em]">
                 {cap.index}
               </div>
-              <div className="lg:max-w-[calc(100%-420px)]">
-                <h3 className="font-display font-medium text-[clamp(24px,2.8vw,40px)] tracking-[-0.018em] transition-transform duration-500 ease-editorial">
+              <div>
+                <h3 className="font-display font-medium text-[clamp(24px,2.8vw,40px)] tracking-[-0.018em]">
                   {cap.title}
                 </h3>
                 <p className="mt-2.5 text-muted text-[15px] max-w-[56ch]">
@@ -169,6 +153,26 @@ export const Capacities: React.FC = () => {
             </Link>
           ))}
         </div>
+      </div>
+
+      {/* Image flottante révélée au survol (desktop) — fixed, suit le curseur */}
+      <div ref={revealRef} className="cap-reveal" aria-hidden="true">
+        {capacities.map((cap, index) => (
+          <div
+            key={cap.index}
+            className="cr-img"
+            data-cap={index + 1}
+            style={{
+              backgroundImage: `url('${cap.image}')`,
+              backgroundColor: '#0c0e12',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="ph-scrim" />
+            <div className="ph-note">{cap.note}</div>
+          </div>
+        ))}
       </div>
     </section>
   );

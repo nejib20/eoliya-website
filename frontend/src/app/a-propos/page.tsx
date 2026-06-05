@@ -1,12 +1,11 @@
+'use client';
+
 import React from 'react';
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SpotlightImage } from '@/components/ui/SpotlightImage';
 
-export const metadata: Metadata = {
-  title: 'À propos — EOLIYA Ingénierie | Bureau d\'études et conseil TCE depuis 2009',
-  description: 'Bureau d\'études et conseil TCE en ingénierie du bâtiment, EOLIYA est le partenaire de confiance des entreprises depuis 2009. Découvrez notre histoire et notre approche.',
-};
+// Note: Metadata moved to layout.tsx or generateMetadata for client components
 
 const engagements = [
   {
@@ -201,12 +200,14 @@ export default function AProposPage() {
             </div>
             <figure className="lg:order-last">
               <div className="relative w-full h-[clamp(320px,42vw,540px)] shadow-[0_30px_80px_rgba(12,14,18,0.22)]">
-                <Image
+                <SpotlightImage
                   src="/images/bureau-etudes-paris.png"
                   alt="Bureau d'études au crépuscule, vue sur Paris"
                   fill
-                  className="object-cover"
+                  containerClassName="w-full h-full"
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  spotlightSize={350}
+                  spotlightIntensity={0.4}
                 />
               </div>
               <figcaption className="mt-[18px] font-mono text-[11px] tracking-[0.14em] uppercase text-muted flex items-center gap-3">

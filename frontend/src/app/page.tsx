@@ -1,37 +1,49 @@
 import React from 'react';
-import { Hero, Manifesto, Capacities, References, Engagement, CTABand } from '@/components/sections';
+import {
+  Hero,
+  Manifesto,
+  Capacities,
+  Lumiere,
+  RenovationSignature,
+  References,
+  Ambiance,
+  Engagement,
+  QuoteBand,
+  ContactSection,
+} from '@/components/sections';
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section - Video background with stats ledger */}
+      {/* Hero — vidéo de fond + ledger de chiffres clés */}
       <Hero />
 
-      {/* Manifesto Section - Introduction text */}
+      {/* Manifeste — introduction éditoriale */}
       <Manifesto />
 
-      {/* Capacities Section - 6 services list */}
+      {/* Capacités — index des 6 domaines (image révélée au survol) */}
       <Capacities />
 
-      {/* References Section - 16 client logos */}
+      {/* Signature — section sombre projecteur curseur */}
+      <Lumiere />
+
+      {/* Signature — rénovation & second œuvre */}
+      <RenovationSignature />
+
+      {/* Références — 16 logos clients grands comptes */}
       <References />
 
-      {/* Engagement Section - 4 pillars */}
+      {/* Bande d'ambiance institutionnelle pleine largeur */}
+      <Ambiance />
+
+      {/* Engagement — éditorial 2 colonnes + figure bureau */}
       <Engagement />
 
-      {/* CTA Band */}
-      <CTABand
-        eyebrow="Pret a demarrer ?"
-        title="Discutons de votre projet."
-        primaryCta={{
-          label: 'Demander un devis',
-          href: '/contact',
-        }}
-        secondaryCta={{
-          label: '01 34 22 30 12',
-          href: 'tel:0134223012',
-        }}
-      />
+      {/* Citation client sur image */}
+      <QuoteBand />
+
+      {/* Contact — fiche technique + formulaire */}
+      <ContactSection />
     </>
   );
 }

@@ -6,22 +6,22 @@ const services = [
   { label: 'Conseil & Pilotage TCE', href: '/services#svc-tce' },
   { label: 'Multi-services & Relamping', href: '/services#svc-relamping' },
   { label: 'Luminaires sur mesure', href: '/services#svc-luminaires' },
-  { label: 'Renovation & second oeuvre', href: '/services#svc-renovation' },
-  { label: 'Amenagement & space planning', href: '/services#svc-amenagement' },
-  { label: 'Equipement medical', href: '/services#svc-medical' },
+  { label: 'Rénovation & second œuvre', href: '/services#svc-renovation' },
+  { label: 'Aménagement & space planning', href: '/services#svc-amenagement' },
+  { label: 'Équipement médical', href: '/services#svc-medical' },
 ];
 
 const links = [
   { label: 'Accueil', href: '/' },
-  { label: 'A propos', href: '/a-propos' },
+  { label: 'À propos', href: '/a-propos' },
   { label: 'Projets', href: '/projets' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
 const legal = [
-  { label: 'Mentions legales', href: '/mentions-legales' },
-  { label: 'Confidentialite', href: '/confidentialite' },
+  { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'Confidentialité', href: '/confidentialite' },
   { label: 'CGV', href: '/cgv' },
 ];
 
@@ -32,18 +32,18 @@ export const Footer: React.FC = () => {
     <footer className="bg-night-2 text-night-ink/[0.66] py-section pb-7.5">
       <div className="wrap">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10">
           {/* Brand Column */}
           <div>
             <Image
               src="/images/eoliya-logo-blanc.png"
-              alt="EOLIYA Ingenierie"
+              alt="EOLIYA Ingénierie"
               width={180}
               height={46}
               className="h-[46px] w-auto"
             />
             <p className="mt-5.5 text-sm leading-relaxed max-w-[32ch] text-night-ink/[0.55]">
-              Expert en ingenierie du batiment depuis 2009. Pilotage TCE, relamping LED, luminaires sur mesure, renovation, amenagement et equipement medical, de l'etude a la livraison.
+              Expert en ingénierie du bâtiment depuis 2009. Pilotage TCE, relamping LED, luminaires sur mesure, rénovation, aménagement et équipement médical, de l&apos;étude à la livraison.
             </p>
             <a
               href="https://linkedin.com/company/eoliya"
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-5 font-mono text-[11px] tracking-[0.1em] text-laiton-light whitespace-nowrap"
             >
-              LinkedIn
+              LinkedIn ↗
             </a>
           </div>
 
@@ -139,7 +139,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom */}
         <div className="mt-[clamp(48px,6vw,80px)] pt-6 border-t border-line-night flex flex-col sm:flex-row justify-between items-center gap-4.5 flex-wrap font-mono text-[11px] tracking-[0.08em] text-night-ink/[0.45]">
-          <span>© {currentYear} EOLIYA Ingenierie. Tous droits reserves</span>
+          <span>© {currentYear} EOLIYA Ingénierie. Tous droits réservés</span>
           <div className="flex gap-5.5 flex-wrap">
             {legal.map((link) => (
               <Link

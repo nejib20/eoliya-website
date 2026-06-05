@@ -11,9 +11,9 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: '2009', label: 'annee de creation', animate: false },
-  { value: '150', suffix: '+', label: 'projets realises', animate: true },
-  { value: '80', suffix: '%', label: 'd\'economies LED', animate: true },
+  { value: '2009', label: 'année de création', animate: false },
+  { value: '150', suffix: '+', label: 'projets réalisés', animate: true },
+  { value: '80', suffix: '%', label: 'd\'économies LED', animate: true },
 ];
 
 // Custom hook for count-up animation
@@ -175,24 +175,24 @@ export const Hero: React.FC = () => {
         {/* Content */}
         <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] flex flex-col justify-end text-night-ink">
           <div>
-            <div className="eyebrow text-night-muted">
-              <b className="text-laiton-light">00</b> &nbsp;Ingenierie du batiment
+            <div className="eyebrow text-night-muted rv">
+              <b className="text-laiton-light">00</b> &nbsp;Ingénierie du bâtiment
             </div>
 
-            <h1 className="text-[clamp(40px,5.4vw,88px)] leading-[1.02] tracking-[-0.022em] mt-[clamp(22px,3vw,40px)] max-w-[15ch] text-night-ink font-display font-medium" style={{ textShadow: '0 2px 30px rgba(0,0,0,0.35)' }}>
-              Des solutions d&apos;ingenierie <em className="text-laiton-light italic">sur&nbsp;mesure</em> pour vos projets tertiaires et industriels
+            <h1 className="rv d1 text-[clamp(40px,5.4vw,88px)] leading-[1.02] tracking-[-0.022em] mt-[clamp(22px,3vw,40px)] max-w-[15ch] text-night-ink font-display font-medium" style={{ textShadow: '0 2px 30px rgba(0,0,0,0.35)' }}>
+              Des solutions d&apos;ingénierie <em className="text-laiton-light italic">sur&nbsp;mesure</em> pour vos projets tertiaires et industriels
             </h1>
 
-            <p className="mt-[clamp(24px,2.6vw,34px)] max-w-[50ch] text-[clamp(16px,1.3vw,18.5px)] text-night-ink/[0.82] leading-[1.65]" style={{ textShadow: '0 1px 16px rgba(0,0,0,0.3)' }}>
-              Depuis 2009, EOLIYA Ingenierie accompagne entreprises et institutions dans leurs projets d&apos;amenagement, de mise aux normes et d&apos;optimisation energetique. De la conception a la realisation, nous mettons notre expertise au service de vos ambitions.
+            <p className="rv d2 mt-[clamp(24px,2.6vw,34px)] max-w-[50ch] text-[clamp(16px,1.3vw,18.5px)] text-night-ink/[0.82] leading-[1.65]" style={{ textShadow: '0 1px 16px rgba(0,0,0,0.3)' }}>
+              Depuis 2009, EOLIYA Ingénierie accompagne entreprises et institutions dans leurs projets d&apos;aménagement, de mise aux normes et d&apos;optimisation énergétique. De la conception à la réalisation, nous mettons notre expertise au service de vos ambitions.
             </p>
 
-            <div className="mt-9 flex gap-[26px] items-center flex-wrap">
+            <div className="rv d3 mt-9 flex gap-[26px] items-center flex-wrap">
               <Link href="/contact" className="btn on-night">
                 Parlons de votre projet <i>→</i>
               </Link>
               <Link href="/services" className="tlink on-night">
-                Decouvrir nos services <i>→</i>
+                Découvrir nos services <i>→</i>
               </Link>
             </div>
           </div>
@@ -215,7 +215,7 @@ export const Hero: React.FC = () => {
           {/* Tag */}
           <div className="mt-[clamp(32px,4vw,52px)] font-mono text-[11px] tracking-[0.14em] uppercase text-night-ink/[0.62] flex items-center gap-3">
             <span className="w-[26px] h-px bg-laiton-light inline-block" />
-            Hall tertiaire, mise en lumiere EOLIYA
+            Hall tertiaire, mise en lumière EOLIYA
           </div>
         </div>
       </div>

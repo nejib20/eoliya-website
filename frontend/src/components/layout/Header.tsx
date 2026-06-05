@@ -13,7 +13,7 @@ interface NavLink {
 
 const navigation: NavLink[] = [
   { label: 'Accueil', href: '/', index: '00' },
-  { label: 'A propos', href: '/a-propos', index: '01' },
+  { label: 'À propos', href: '/a-propos', index: '01' },
   { label: 'Services', href: '/services', index: '02' },
   { label: 'Projets', href: '/projets', index: '03' },
   { label: 'Blog', href: '/blog', index: '04' },
@@ -59,19 +59,17 @@ export const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-[60] transition-all duration-[400ms] ease-editorial ${
-          isScrolled
-            ? 'border-b border-line bg-paper/[0.92] backdrop-blur-[16px] backdrop-saturate-[140%]'
-            : 'border-b border-transparent bg-paper/[0.86] backdrop-blur-[16px] backdrop-saturate-[140%]'
+        className={`sticky top-0 z-[60] bg-paper/[0.86] backdrop-blur-[16px] backdrop-saturate-[140%] border-b transition-colors duration-[400ms] ease-editorial ${
+          isScrolled ? 'border-line' : 'border-transparent'
         }`}
       >
         <div className="wrap">
           <div className="flex items-center justify-between h-[78px] gap-7">
             {/* Brand */}
-            <Link href="/" className="flex items-center flex-none" aria-label="EOLIYA Ingenierie">
+            <Link href="/" className="flex items-center flex-none" aria-label="EOLIYA Ingénierie">
               <Image
                 src="/images/eoliya-logo-sombre.png"
-                alt="EOLIYA Ingenierie"
+                alt="EOLIYA Ingénierie"
                 width={120}
                 height={28}
                 className="h-7 w-auto"
@@ -85,7 +83,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative font-mono text-xs tracking-[0.12em] uppercase py-2.5 px-3.5 whitespace-nowrap transition-colors duration-300 ease-editorial ${
+                  className={`group relative font-mono text-xs tracking-[0.12em] uppercase py-2.5 px-3.5 whitespace-nowrap transition-colors duration-300 ease-editorial ${
                     isActive(link.href)
                       ? 'text-ink'
                       : 'text-ink-2 hover:text-ink'
