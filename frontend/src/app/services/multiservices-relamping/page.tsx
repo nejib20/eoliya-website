@@ -4,28 +4,28 @@ import Link from 'next/link';
 import { CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Multi-services et Relamping LED — EOLIYA Ingenierie',
-  description: 'Maintenance electrique, depannage 24/7 et solutions de relamping LED haute performance. Jusqu\'a 80% d\'economies d\'energie garanties.',
+  title: 'Multi-services et Relamping LED — EOLIYA Ingénierie',
+  description: 'Maintenance électrique, dépannage 24/7 et solutions de relamping LED haute performance. Jusqu’à 80% d’économies d’énergie garanties.',
 };
 
 const avantages = [
-  { title: 'Jusqu\'a 80% d\'economies', description: 'Reduction drastique de votre facture d\'electricite liee a l\'eclairage.' },
-  { title: 'Duree de vie x5', description: 'Les LED durent 50 000h contre 10 000h pour les tubes fluocompacts.' },
-  { title: 'Qualite d\'eclairage', description: 'Rendu des couleurs optimal, pas de scintillement, allumage instantane.' },
-  { title: 'Maintenance reduite', description: 'Moins de pannes, moins d\'interventions, moins de gestion au quotidien.' },
+  { title: 'Jusqu’à 80% d’économies', description: 'Réduction drastique de votre facture d’électricité liée à l’éclairage.' },
+  { title: 'Durée de vie x5', description: 'Les LED durent 50 000h contre 10 000h pour les tubes fluocompacts.' },
+  { title: 'Qualité d’éclairage', description: 'Rendu des couleurs optimal, pas de scintillement, allumage instantané.' },
+  { title: 'Maintenance réduite', description: 'Moins de pannes, moins d’interventions, moins de gestion au quotidien.' },
 ];
 
 const prestations = [
-  { title: 'Depannage electrique 24/7', description: 'Intervention rapide pour tous types de pannes electriques : disjonctions, coupures, defauts d\'eclairage. Hotline disponible pour nos clients sous contrat.' },
-  { title: 'Mise aux normes des installations', description: 'Diagnostic de conformite NFC 15-100, mise en securite des tableaux electriques, mise aux normes des circuits et protections.' },
-  { title: 'Remplacement par LED', description: 'Audit d\'eclairage, calculs photometriques, fourniture et pose de luminaires LED, gestion des dechets (DEEE). ROI moyen : 2 a 3 ans.' },
-  { title: 'Contrats de maintenance sur mesure', description: 'Maintenance preventive programmee, interventions correctives illimitees, gestion du parc de luminaires, reporting mensuel.' },
+  { title: 'Dépannage électrique 24/7', description: 'Intervention rapide pour tous types de pannes électriques : disjonctions, coupures, défauts d’éclairage. Hotline disponible pour nos clients sous contrat.' },
+  { title: 'Mise aux normes des installations', description: 'Diagnostic de conformité NFC 15-100, mise en sécurité des tableaux électriques, mise aux normes des circuits et protections.' },
+  { title: 'Remplacement par LED', description: 'Audit d’éclairage, calculs photométriques, fourniture et pose de luminaires LED, gestion des déchets (DEEE). ROI moyen : 2 à 3 ans.' },
+  { title: 'Contrats de maintenance sur mesure', description: 'Maintenance préventive programmée, interventions correctives illimitées, gestion du parc de luminaires, reporting mensuel.' },
 ];
 
 const stats = [
-  { value: '80%', label: 'Economies d\'energie moyennes' },
+  { value: '80%', label: 'Économies d’énergie moyennes' },
   { value: '2-3 ans', label: 'Retour sur investissement' },
-  { value: '50 000h', label: 'Duree de vie LED' },
+  { value: '50 000h', label: 'Durée de vie LED' },
 ];
 
 export default function MultiservicesRelampingPage() {
@@ -34,12 +34,12 @@ export default function MultiservicesRelampingPage() {
       {/* Hero */}
       <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
         <div className="wrap">
-          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
-            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-            <span>/</span>
-            <Link href="/services" className="hover:text-ink transition-colors">Services</Link>
-            <span>/</span>
-            <span className="text-ink">Relamping LED</span>
+          <div className="crumb">
+            <Link href="/">Accueil</Link>
+            <span className="sep">/</span>
+            <Link href="/services">Services</Link>
+            <span className="sep">/</span>
+            <span>Relamping LED</span>
           </div>
 
           <div className="eyebrow mb-[22px]">
@@ -51,7 +51,7 @@ export default function MultiservicesRelampingPage() {
           </h1>
 
           <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[55ch]">
-            Maintenance corrective et preventive de vos installations electriques, CVC et systemes de securite. Transition energetique LED avec economies garanties.
+            Maintenance corrective et préventive de vos installations électriques, CVC et systèmes de sécurité. Transition énergétique LED avec économies garanties.
           </p>
         </div>
       </section>
@@ -65,10 +65,10 @@ export default function MultiservicesRelampingPage() {
             </h2>
             <div className="mt-6 text-[clamp(16px,1.4vw,18px)] leading-relaxed text-ink-2 space-y-5">
               <p>
-                EOLIYA intervient en maintenance corrective et preventive sur vos installations electriques, CVC et systemes de securite. Nous accompagnons egalement votre transition energetique grace a nos solutions de relamping LED performantes.
+                EOLIYA intervient en maintenance corrective et préventive sur vos installations électriques, CVC et systèmes de sécurité. Nous accompagnons également votre transition énergétique grâce à nos solutions de relamping LED performantes.
               </p>
               <p>
-                Nos contrats de maintenance sur mesure s&apos;adaptent a vos besoins specifiques : depannage 24/7, interventions programmees, gestion du parc de luminaires.
+                Nos contrats de maintenance sur mesure s&apos;adaptent à vos besoins spécifiques : dépannage 24/7, interventions programmées, gestion du parc de luminaires.
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function MultiservicesRelampingPage() {
             <b>Avantages du relamping LED</b>
           </div>
           <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
-            Des economies mesurables et durables
+            Des économies mesurables et durables
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -137,7 +137,7 @@ export default function MultiservicesRelampingPage() {
             <b>Retour sur investissement</b>
           </div>
           <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[24ch] mb-[clamp(40px,5vw,64px)]">
-            Calculez vos economies potentielles
+            Calculez vos économies potentielles
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -154,7 +154,7 @@ export default function MultiservicesRelampingPage() {
           </div>
 
           <p className="text-center text-paper/80 text-[clamp(16px,1.4vw,18px)] leading-relaxed max-w-[48ch] mx-auto mb-8">
-            Un batiment de 1000 m² peut economiser jusqu&apos;a 15 000€/an sur sa facture d&apos;eclairage
+            Un bâtiment de 1000 m² peut économiser jusqu&apos;à 15 000€/an sur sa facture d&apos;éclairage
           </p>
 
           <div className="text-center">
@@ -170,8 +170,8 @@ export default function MultiservicesRelampingPage() {
 
       {/* CTA */}
       <CTABand
-        eyebrow="Pret a reduire vos couts energetiques ?"
-        title="Nos ingenieurs realisent un audit gratuit de votre installation."
+        eyebrow="Prêt à réduire vos coûts énergétiques ?"
+        title="Nos ingénieurs réalisent un audit gratuit de votre installation."
         primaryCta={{
           label: 'Demander un audit',
           href: '/contact',

@@ -4,22 +4,22 @@ import Link from 'next/link';
 import { CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Conseil et Pilotage TCE — EOLIYA Ingenierie',
-  description: 'Service de conseil TCE et pilotage de projets de construction, renovation et amenagement. Coordination des corps d\'etat, mise aux normes PMR et securite incendie.',
+  title: 'Conseil et Pilotage TCE — EOLIYA Ingénierie',
+  description: 'Service de conseil TCE et pilotage de projets de construction, rénovation et aménagement. Coordination des corps d’état, mise aux normes PMR et sécurité incendie.',
 };
 
 const prestations = [
-  { title: 'Analyse de faisabilite et diagnostic technique', description: 'Etat des lieux complet, identification des contraintes reglementaires et opportunites d\'optimisation.' },
-  { title: 'Elaboration des cahiers des charges', description: 'Redaction des CCTP (Cahier des Clauses Techniques Particulieres) et documents de consultation.' },
-  { title: 'Supervision des travaux et reception', description: 'Suivi de chantier, reunions de coordination, levee des reserves et constitution du DOE.' },
-  { title: 'Accompagnement reglementaire', description: 'Accessibilite PMR, securite incendie, normes electriques NFC 15-100, dossiers d\'autorisation.' },
+  { title: 'Analyse de faisabilité et diagnostic technique', description: 'État des lieux complet, identification des contraintes réglementaires et opportunités d’optimisation.' },
+  { title: 'Élaboration des cahiers des charges', description: 'Rédaction des CCTP (Cahier des Clauses Techniques Particulières) et documents de consultation.' },
+  { title: 'Supervision des travaux et réception', description: 'Suivi de chantier, réunions de coordination, levée des réserves et constitution du DOE.' },
+  { title: 'Accompagnement réglementaire', description: 'Accessibilité PMR, sécurité incendie, normes électriques NFC 15-100, dossiers d’autorisation.' },
 ];
 
 const methodologie = [
-  { index: '01', title: 'Phase d\'audit et diagnostic', description: 'Visite de site, releves techniques, analyse des contraintes et opportunites. Remise d\'un rapport de diagnostic avec preconisations et estimation budgetaire.' },
-  { index: '02', title: 'Conception et consultation', description: 'Elaboration des dossiers techniques, redaction des CCTP, lancement de la consultation des entreprises et analyse des offres.' },
-  { index: '03', title: 'Pilotage de chantier', description: 'Reunions de coordination hebdomadaires, suivi du planning et du budget, validation des situations de travaux, gestion des aleas.' },
-  { index: '04', title: 'Reception et livraison', description: 'Organisation des operations de reception, levee des reserves, constitution du dossier des ouvrages executes (DOE) et accompagnement post-livraison.' },
+  { index: '01', title: 'Phase d’audit et diagnostic', description: 'Visite de site, relevés techniques, analyse des contraintes et opportunités. Remise d’un rapport de diagnostic avec préconisations et estimation budgétaire.' },
+  { index: '02', title: 'Conception et consultation', description: 'Élaboration des dossiers techniques, rédaction des CCTP, lancement de la consultation des entreprises et analyse des offres.' },
+  { index: '03', title: 'Pilotage de chantier', description: 'Réunions de coordination hebdomadaires, suivi du planning et du budget, validation des situations de travaux, gestion des aléas.' },
+  { index: '04', title: 'Réception et livraison', description: 'Organisation des opérations de réception, levée des réserves, constitution du dossier des ouvrages exécutés (DOE) et accompagnement post-livraison.' },
 ];
 
 export default function ConseilPilotagePage() {
@@ -28,12 +28,12 @@ export default function ConseilPilotagePage() {
       {/* Hero */}
       <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
         <div className="wrap">
-          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
-            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-            <span>/</span>
-            <Link href="/services" className="hover:text-ink transition-colors">Services</Link>
-            <span>/</span>
-            <span className="text-ink">Conseil & Pilotage TCE</span>
+          <div className="crumb">
+            <Link href="/">Accueil</Link>
+            <span className="sep">/</span>
+            <Link href="/services">Services</Link>
+            <span className="sep">/</span>
+            <span>Conseil &amp; Pilotage TCE</span>
           </div>
 
           <div className="eyebrow mb-[22px]">
@@ -45,7 +45,7 @@ export default function ConseilPilotagePage() {
           </h1>
 
           <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[55ch]">
-            Maitrise d&apos;oeuvre d&apos;execution pour vos projets de construction, renovation et amenagement. Coordination complete des intervenants et suivi budgetaire.
+            Maîtrise d&apos;œuvre d&apos;exécution pour vos projets de construction, rénovation et aménagement. Coordination complète des intervenants et suivi budgétaire.
           </p>
         </div>
       </section>
@@ -55,14 +55,14 @@ export default function ConseilPilotagePage() {
         <div className="wrap">
           <div className="max-w-[720px]">
             <h2 className="font-display font-medium text-[clamp(26px,3vw,40px)] tracking-[-0.02em]">
-              TCE et maitrise d&apos;oeuvre d&apos;execution
+              TCE et maîtrise d&apos;œuvre d&apos;exécution
             </h2>
             <div className="mt-6 text-[clamp(16px,1.4vw,18px)] leading-relaxed text-ink-2 space-y-5">
               <p>
-                Vous pilotez un projet de construction, renovation ou amenagement ? Nos ingenieurs assurent la mission de technicien conseil en environnement (TCE) et coordonnent l&apos;ensemble des intervenants : architectes, bureaux d&apos;etudes, entreprises de travaux.
+                Vous pilotez un projet de construction, rénovation ou aménagement ? Nos ingénieurs assurent la mission de technicien conseil en environnement (TCE) et coordonnent l&apos;ensemble des intervenants : architectes, bureaux d&apos;études, entreprises de travaux.
               </p>
               <p>
-                EOLIYA Ingenierie vous accompagne de la phase de conception jusqu&apos;a la reception des travaux, en garantissant le respect des delais, du budget et des normes en vigueur.
+                EOLIYA Ingénierie vous accompagne de la phase de conception jusqu&apos;à la réception des travaux, en garantissant le respect des délais, du budget et des normes en vigueur.
               </p>
             </div>
           </div>
@@ -94,10 +94,10 @@ export default function ConseilPilotagePage() {
       <section className="py-[clamp(72px,9vw,140px)]">
         <div className="wrap">
           <div className="eyebrow mb-5">
-            <b>Notre methodologie</b>
+            <b>Notre méthodologie</b>
           </div>
           <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
-            Une approche structuree pour chaque projet
+            Une approche structurée pour chaque projet
           </h2>
 
           <div className="border-t border-line">
@@ -122,8 +122,8 @@ export default function ConseilPilotagePage() {
 
       {/* CTA */}
       <CTABand
-        eyebrow="Un projet de construction ou renovation ?"
-        title="Confiez le pilotage a nos ingenieurs."
+        eyebrow="Un projet de construction ou rénovation ?"
+        title="Confiez le pilotage à nos ingénieurs."
         primaryCta={{
           label: 'Demander un devis',
           href: '/contact',

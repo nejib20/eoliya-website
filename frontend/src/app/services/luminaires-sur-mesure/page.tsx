@@ -4,40 +4,40 @@ import Link from 'next/link';
 import { CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Luminaires sur mesure — EOLIYA Ingenierie',
-  description: 'Conception et fabrication de luminaires techniques sur mesure. Calculs photometriques, conformite normes NFC 71-121, EN 12464, solutions ATEX.',
+  title: 'Luminaires sur mesure — EOLIYA Ingénierie',
+  description: 'Conception et fabrication de luminaires techniques sur mesure. Calculs photométriques, conformité normes NFC 71-121, EN 12464, solutions ATEX.',
 };
 
 const expertises = [
-  { title: 'Etude d\'implantation', description: 'Calculs d\'eclairement conformes aux normes EN 12464 et NFC 71-121.' },
-  { title: 'Conformite normes', description: 'Respect des normes NFC 71-121, EN 12464, BAEL et reglementation ATEX.' },
-  { title: 'Fabrication francaise', description: 'Production en France avec nos partenaires industriels certifies.' },
-  { title: 'Solutions ATEX', description: 'Luminaires antideflagrants pour atmospheres explosives et milieux specifiques.' },
+  { title: 'Étude d’implantation', description: 'Calculs d’éclairement conformes aux normes EN 12464 et NFC 71-121.' },
+  { title: 'Conformité normes', description: 'Respect des normes NFC 71-121, EN 12464, BAEL et réglementation ATEX.' },
+  { title: 'Fabrication française', description: 'Production en France avec nos partenaires industriels certifiés.' },
+  { title: 'Solutions ATEX', description: 'Luminaires antidéflagrants pour atmosphères explosives et milieux spécifiques.' },
 ];
 
 const processus = [
-  { index: '01', title: 'Analyse du besoin', description: 'Etude de votre cahier des charges : contraintes dimensionnelles, environnementales, normatives et esthetiques. Visite de site si necessaire.' },
-  { index: '02', title: 'Etudes photometriques', description: 'Calculs d\'eclairement (lux), d\'uniformite, de rendu des couleurs (IRC), choix des sources LED et optiques adaptees.' },
-  { index: '03', title: 'Conception et prototypage', description: 'Design du luminaire, plans de fabrication, validation avec le client, realisation d\'un prototype pour tests et validation.' },
-  { index: '04', title: 'Fabrication et livraison', description: 'Production en petite ou moyenne serie, controle qualite, livraison et installation si besoin. Garantie et SAV assures.' },
+  { index: '01', title: 'Analyse du besoin', description: 'Étude de votre cahier des charges : contraintes dimensionnelles, environnementales, normatives et esthétiques. Visite de site si nécessaire.' },
+  { index: '02', title: 'Études photométriques', description: 'Calculs d’éclairement (lux), d’uniformité, de rendu des couleurs (IRC), choix des sources LED et optiques adaptées.' },
+  { index: '03', title: 'Conception et prototypage', description: 'Design du luminaire, plans de fabrication, validation avec le client, réalisation d’un prototype pour tests et validation.' },
+  { index: '04', title: 'Fabrication et livraison', description: 'Production en petite ou moyenne série, contrôle qualité, livraison et installation si besoin. Garantie et SAV assurés.' },
 ];
 
 const applications = [
   {
     title: 'Environnements industriels',
-    items: ['Luminaires ATEX zones 1, 2, 21, 22', 'Eclairage de process et postes de travail', 'Solutions haute temperature', 'Resistance aux projections et poussieres (IP65+)'],
+    items: ['Luminaires ATEX zones 1, 2, 21, 22', 'Éclairage de process et postes de travail', 'Solutions haute température', 'Résistance aux projections et poussières (IP65+)'],
   },
   {
-    title: 'Batiments patrimoniaux',
-    items: ['Integration discrete en monuments historiques', 'Respect des contraintes architecturales', 'Eclairage museographique', 'Solutions invisibles ou camoufles'],
+    title: 'Bâtiments patrimoniaux',
+    items: ['Intégration discrète en monuments historiques', 'Respect des contraintes architecturales', 'Éclairage muséographique', 'Solutions invisibles ou camouflées'],
   },
   {
     title: 'Espaces tertiaires',
-    items: ['Luminaires design sur-mesure', 'Integration en faux-plafonds atypiques', 'Eclairage de signaletique', 'Solutions acoustiques integrees'],
+    items: ['Luminaires design sur-mesure', 'Intégration en faux-plafonds atypiques', 'Éclairage de signalétique', 'Solutions acoustiques intégrées'],
   },
   {
-    title: 'Milieux specifiques',
-    items: ['Salles blanches (pharmaceutique, agroalimentaire)', 'Environnements marins ou corrosifs', 'Zones a risques biologiques', 'Tunnels et infrastructures'],
+    title: 'Milieux spécifiques',
+    items: ['Salles blanches (pharmaceutique, agroalimentaire)', 'Environnements marins ou corrosifs', 'Zones à risques biologiques', 'Tunnels et infrastructures'],
   },
 ];
 
@@ -47,12 +47,12 @@ export default function LuminairesSurMesurePage() {
       {/* Hero */}
       <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
         <div className="wrap">
-          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
-            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-            <span>/</span>
-            <Link href="/services" className="hover:text-ink transition-colors">Services</Link>
-            <span>/</span>
-            <span className="text-ink">Luminaires sur mesure</span>
+          <div className="crumb">
+            <Link href="/">Accueil</Link>
+            <span className="sep">/</span>
+            <Link href="/services">Services</Link>
+            <span className="sep">/</span>
+            <span>Luminaires sur mesure</span>
           </div>
 
           <div className="eyebrow mb-[22px]">
@@ -64,7 +64,7 @@ export default function LuminairesSurMesurePage() {
           </h1>
 
           <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[55ch]">
-            Conception et fabrication de solutions d&apos;eclairage techniques adaptees a vos contraintes architecturales et normatives specifiques.
+            Conception et fabrication de solutions d&apos;éclairage techniques adaptées à vos contraintes architecturales et normatives spécifiques.
           </p>
         </div>
       </section>
@@ -78,10 +78,10 @@ export default function LuminairesSurMesurePage() {
             </h2>
             <div className="mt-6 text-[clamp(16px,1.4vw,18px)] leading-relaxed text-ink-2 space-y-5">
               <p>
-                Notre bureau d&apos;etudes concoit des luminaires techniques adaptes a vos contraintes architecturales et normatives. Nous realisons calculs photometriques, prototypes et fabrication en petite ou moyenne serie.
+                Notre bureau d&apos;études conçoit des luminaires techniques adaptés à vos contraintes architecturales et normatives. Nous réalisons calculs photométriques, prototypes et fabrication en petite ou moyenne série.
               </p>
               <p>
-                Que vous ayez des contraintes dimensionnelles, des environnements specifiques (ATEX, salles blanches) ou des exigences esthetiques particulieres, nos ingenieurs trouvent la solution.
+                Que vous ayez des contraintes dimensionnelles, des environnements spécifiques (ATEX, salles blanches) ou des exigences esthétiques particulières, nos ingénieurs trouvent la solution.
               </p>
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function LuminairesSurMesurePage() {
             <b>Processus de conception</b>
           </div>
           <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
-            De l&apos;idee a la realisation
+            De l&apos;idée à la réalisation
           </h2>
 
           <div className="border-t border-line">
@@ -172,9 +172,9 @@ export default function LuminairesSurMesurePage() {
       {/* CTA */}
       <CTABand
         eyebrow="Un projet de luminaire sur mesure ?"
-        title="Confiez votre projet a nos ingenieurs."
+        title="Confiez votre projet à nos ingénieurs."
         primaryCta={{
-          label: 'Demander une etude',
+          label: 'Demander une étude',
           href: '/contact',
         }}
         secondaryCta={{
