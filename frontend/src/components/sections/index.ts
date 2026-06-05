@@ -1,6 +1,4 @@
 export { Hero } from './Hero';
-export { HeroImmersive } from './HeroImmersive';
-export { HeroPremium } from './HeroPremium';
 export { Manifesto } from './Manifesto';
 export { Capacities } from './Capacities';
 export { Lumiere } from './Lumiere';
@@ -13,7 +11,6 @@ export { ContactSection } from './ContactSection';
 export { CTABand } from './CTABand';
 export { Services } from './Services';
 export { Clients } from './Clients';
-export { Projects } from './Projects';
 export { ProjectsGallery } from './ProjectsGallery';
 export { Testimonials } from './Testimonials';
 export type { Testimonial } from './Testimonials';

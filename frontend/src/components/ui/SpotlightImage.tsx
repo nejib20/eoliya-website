@@ -78,15 +78,16 @@ export const SpotlightImage: React.FC<SpotlightImageProps> = ({
         />
       )}
 
-      {/* Spotlight overlay */}
+      {/* Spotlight overlay — teinte laiton chaude, fusion « screen » (signature lumière) */}
       <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-300"
         style={{
           opacity: isHovering ? 1 : 0,
+          mixBlendMode: 'screen',
           background: `radial-gradient(circle ${spotlightSize}px at ${mousePosition.x}px ${mousePosition.y}px,
-            rgba(255, 255, 255, ${spotlightIntensity}) 0%,
-            rgba(255, 255, 255, ${spotlightIntensity * 0.5}) 30%,
-            rgba(0, 0, 0, 0) 70%)`,
+            rgba(255, 238, 205, ${spotlightIntensity}) 0%,
+            rgba(255, 225, 170, ${spotlightIntensity * 0.45}) 40%,
+            transparent 66%)`,
         }}
       />
 

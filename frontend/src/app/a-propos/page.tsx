@@ -83,7 +83,7 @@ export default function AProposPage() {
       <section className="about-story">
         <div className="wrap">
           <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-[clamp(36px,5vw,90px)] py-[clamp(64px,8vw,120px)] items-start">
-            <div className="lg:sticky lg:top-[110px]">
+            <div className="lg:sticky lg:top-[110px] rv">
               <div className="eyebrow">
                 <b>Notre histoire</b>
               </div>
@@ -91,7 +91,7 @@ export default function AProposPage() {
                 Une expertise <em className="italic text-laiton-deep">construite</em> dans la durée.
               </h2>
             </div>
-            <div className="space-y-[22px]">
+            <div className="space-y-[22px] rv d1">
               <p className="text-ink-2 text-[clamp(16.5px,1.4vw,18.5px)] leading-[1.7] max-w-[60ch]">
                 Fondée en 2009, EOLIYA Ingénierie s&apos;est constituée au fil des années comme
                 un acteur de l&apos;ingénierie du bâtiment, au service d&apos;une clientèle exigeante
@@ -111,38 +111,25 @@ export default function AProposPage() {
         </div>
       </section>
 
-      {/* Notre Approche - avec sticky left */}
-      <section className="engage">
+      {/* Notre Approche - markup canonique .engage + ancre #approche */}
+      <section className="engage" id="approche">
         <div className="wrap">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-[clamp(36px,5vw,90px)] py-[clamp(72px,9vw,140px)] items-start">
-            <div className="lg:sticky lg:top-[110px]">
-              <div className="eyebrow">
-                <b>Notre approche</b>
-              </div>
-              <h2 className="font-display font-medium text-[clamp(30px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] mt-[26px]">
-                Trois engagements au cœur de chaque projet.
-              </h2>
-              <p className="mt-[26px] max-w-[40ch] text-ink-2 text-[16.5px]">
-                Une méthode constante, de l&apos;audit initial à la livraison finale, pour
-                garantir la qualité, les délais et la maîtrise du budget.
+          <div className="grid">
+            <div className="left rv">
+              <div className="eyebrow"><b>Notre approche</b></div>
+              <h2>Trois engagements au cœur de chaque projet.</h2>
+              <p>
+                Une méthode constante, de l&apos;audit initial à la livraison finale, pour garantir
+                la qualité, les délais et la maîtrise du budget.
               </p>
             </div>
             <div className="points">
-              {engagements.map((eng) => (
-                <div
-                  key={eng.index}
-                  className="py-[clamp(26px,3vw,40px)] border-t border-line grid grid-cols-[56px_1fr] gap-[22px] last:border-b"
-                >
-                  <span className="font-mono text-[13px] text-laiton-deep pt-[6px]">
-                    {eng.index}
-                  </span>
+              {engagements.map((eng, i) => (
+                <div className={`pt rv${i > 0 ? ` d${i}` : ''}`} key={eng.index}>
+                  <div className="pidx">{eng.index}</div>
                   <div>
-                    <h3 className="font-display font-medium text-[clamp(21px,2.2vw,28px)] tracking-[-0.01em]">
-                      {eng.title}
-                    </h3>
-                    <p className="mt-3 text-muted text-[15.5px] max-w-[52ch]">
-                      {eng.description}
-                    </p>
+                    <h3>{eng.title}</h3>
+                    <p>{eng.description}</p>
                   </div>
                 </div>
               ))}
@@ -154,7 +141,7 @@ export default function AProposPage() {
       {/* Chiffres clés */}
       <section className="about-stats">
         <div className="wrap">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 rv">
             <div className="stat-item">
               <div className="n">2009</div>
               <div className="l">Année de création</div>
@@ -179,7 +166,7 @@ export default function AProposPage() {
       <section className="about-bureau">
         <div className="wrap">
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-[clamp(36px,5vw,80px)] py-[clamp(64px,8vw,120px)] items-center">
-            <div>
+            <div className="rv">
               <div className="eyebrow">
                 <b>Le bureau d&apos;études</b>
               </div>
@@ -198,7 +185,7 @@ export default function AProposPage() {
                 à la livraison.
               </p>
             </div>
-            <figure className="lg:order-last">
+            <figure className="lg:order-last rv d1">
               <div className="relative w-full h-[clamp(320px,42vw,540px)] shadow-[0_30px_80px_rgba(12,14,18,0.22)]">
                 <SpotlightImage
                   src="/images/bureau-etudes-paris.png"
@@ -222,7 +209,7 @@ export default function AProposPage() {
       {/* Six métiers */}
       <section className="about-metiers">
         <div className="wrap">
-          <div className="flex justify-between items-baseline gap-6 flex-wrap mb-[clamp(30px,4vw,48px)]">
+          <div className="flex justify-between items-baseline gap-6 flex-wrap mb-[clamp(30px,4vw,48px)] rv">
             <h2 className="font-display font-medium text-[clamp(26px,3vw,42px)] tracking-[-0.02em]">
               Six métiers, <em className="italic text-laiton-deep">une exigence</em> d&apos;ingénierie.
             </h2>
@@ -230,7 +217,7 @@ export default function AProposPage() {
               Voir tous nos services <i>→</i>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-line">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-line rv d1">
             {metiers.map((m) => (
               <Link
                 key={m.index}
@@ -255,7 +242,7 @@ export default function AProposPage() {
       {/* Ils nous font confiance */}
       <section className="refs">
         <div className="wrap">
-          <div className="flex justify-between items-baseline gap-6 flex-wrap mb-[clamp(34px,4vw,52px)]">
+          <div className="flex justify-between items-baseline gap-6 flex-wrap mb-[clamp(34px,4vw,52px)] rv">
             <h2 className="font-display font-medium text-[clamp(26px,3vw,42px)] tracking-[-0.02em]">
               Ils nous font confiance
             </h2>
@@ -263,7 +250,7 @@ export default function AProposPage() {
               16 références grands comptes · 150+ projets
             </span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-line">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-line rv d1">
             {clients.map((client) => (
               <div
                 key={client.name}

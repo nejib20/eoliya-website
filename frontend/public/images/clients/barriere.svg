@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="none">
-  <!-- Barrière logo - Luxury hotel/casino style -->
-  <g>
-    <!-- Crown symbol for luxury -->
-    <path d="M20 35 L25 25 L30 30 L35 22 L40 30 L45 25 L50 35 L35 40 Z" fill="#C0A062"/>
-    <rect x="20" y="40" width="30" height="3" fill="#C0A062"/>
-    <text x="55" y="45" font-family="serif" font-size="22" font-weight="700" fill="#2C3E50">BARRIÈRE</text>
-  </g>
-</svg>
