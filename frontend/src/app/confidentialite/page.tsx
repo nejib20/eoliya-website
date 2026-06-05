@@ -1,101 +1,88 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialite — EOLIYA Ingenierie',
-  description: 'Politique de confidentialite d\'EOLIYA Ingenierie. Informations sur la collecte et le traitement des donnees personnelles.',
+  title: 'Politique de confidentialité — EOLIYA Ingénierie',
+  description: "Politique de confidentialité d’EOLIYA Ingénierie : collecte, finalités et droits sur vos données personnelles.",
 };
 
 export default function ConfidentialitePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
+      <nav className="wrap crumb rv" aria-label="Fil d’ariane">
+        <Link href="/">Accueil</Link>
+        <span className="sep">/</span>
+        <span>Confidentialité</span>
+      </nav>
+
+      {/* HERO */}
+      <section className="legal-hero">
         <div className="wrap">
-          <div className="eyebrow">Protection des donnees</div>
-          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em] mt-4">
-            Politique de confidentialite
-          </h1>
+          <div className="eyebrow rv">Protection des données</div>
+          <h1 className="rv d1">Politique de confidentialité</h1>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-[clamp(40px,5vw,72px)] pb-[clamp(16px,2vw,28px)]">
+      {/* CORPS */}
+      <section className="legal-body">
         <div className="wrap">
-          <div className="max-w-[720px]">
-            <div className="space-y-[clamp(34px,4vw,52px)]">
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Responsable du traitement
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Le responsable du traitement des donnees personnelles collectees sur ce site est EOLIYA (SASU), representee par Sofian Ayeb, president. Siege social : 131 Boulevard Pereire, 75017 Paris. Courriel : contact@eoliya.com.
-                </p>
-              </section>
+          <div className="col">
+            <section className="rv">
+              <h2>Responsable du traitement</h2>
+              <p>
+                Les données collectées sur ce site sont traitées par EOLIYA (SASU), dont le siège est au 131 Boulevard Pereire, 75017 Paris. Pour toute question relative à vos données : contact@eoliya.com.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Donnees collectees
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Les donnees personnelles collectees sur ce site sont celles renseignees volontairement par l&apos;utilisateur via le formulaire de contact : civilite, nom, prenom, adresse e-mail, numero de telephone (facultatif), entreprise (facultatif), objet et contenu du message.
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Données collectées</h2>
+              <p>
+                Via le formulaire de contact : civilité, nom, prénom, société ou organisation, adresse électronique, numéro de téléphone, objet de la demande et message. Seuls les champs signalés comme obligatoires sont nécessaires au traitement de votre demande. Des cookies strictement nécessaires au fonctionnement du site peuvent également être enregistrés.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Finalites du traitement
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Les donnees sont collectees afin de repondre aux demandes de contact, devis, questions techniques ou candidatures. Elles permettent egalement d&apos;assurer le suivi commercial et relationnel.
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Finalités</h2>
+              <p>
+                Ces données servent à répondre à vos demandes, établir un devis, assurer le suivi de la relation et, le cas échéant, vous recontacter au sujet de votre projet.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Base legale
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Le traitement des donnees repose sur le consentement de l&apos;utilisateur (case a cocher du formulaire) et sur l&apos;interet legitime d&apos;EOLIYA a repondre aux sollicitations recues.
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Base légale</h2>
+              <p>
+                Le traitement repose sur votre consentement, recueilli lors de l’envoi du formulaire, ainsi que sur l’intérêt légitime d’EOLIYA à répondre aux sollicitations et à gérer sa relation commerciale.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Duree de conservation
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Les donnees sont conservees pendant la duree necessaire au traitement de la demande, puis archivees pendant trois ans a compter du dernier contact, conformement aux recommandations de la CNIL.
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Destinataires</h2>
+              <p>
+                Vos données sont destinées aux seules personnes habilitées d’EOLIYA et, le cas échéant, à ses prestataires techniques, notamment l’hébergeur du site. Elles ne sont ni vendues ni cédées à des tiers à des fins commerciales.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Droits de l&apos;utilisateur
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Conformement au Reglement General sur la Protection des Donnees (RGPD), vous disposez d&apos;un droit d&apos;acces, de rectification, de suppression, d&apos;opposition et de portabilite de vos donnees. Pour exercer ces droits, adressez votre demande a : contact@eoliya.com. Vous pouvez egalement introduire une reclamation aupres de la CNIL (cnil.fr).
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Durée de conservation</h2>
+              <p>
+                Vos données sont conservées le temps nécessaire au traitement de votre demande, puis archivées pour une durée maximale de trois ans à compter du dernier contact, sauf obligation légale de conservation plus longue.
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Cookies
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  Ce site utilise uniquement des cookies techniques strictement necessaires a son fonctionnement. Aucun cookie publicitaire ou de suivi tiers n&apos;est depose sans consentement prealable.
-                </p>
-              </section>
+            <section className="rv">
+              <h2>Vos droits</h2>
+              <p>
+                Conformément au Règlement général sur la protection des données et à la loi Informatique et Libertés, vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité de vos données. Vous pouvez les exercer en écrivant à contact@eoliya.com. Vous disposez également du droit d’introduire une réclamation auprès de la CNIL (www.cnil.fr).
+              </p>
+            </section>
 
-              <section>
-                <h2 className="font-mono font-medium text-xs tracking-[0.18em] uppercase text-laiton-deep">
-                  Securite
-                </h2>
-                <p className="mt-[14px] text-[clamp(15.5px,1.4vw,17px)] leading-[1.72] text-ink-2">
-                  EOLIYA met en oeuvre des mesures techniques et organisationnelles appropriees pour proteger les donnees personnelles contre tout acces non autorise, perte ou alteration. Le site est heberge sur des serveurs securises (HTTPS).
-                </p>
-              </section>
-            </div>
+            <section className="rv">
+              <h2>Cookies</h2>
+              <p>
+                Ce site utilise uniquement des cookies strictement nécessaires à son bon fonctionnement. Aucun cookie publicitaire ou de suivi tiers n’est déposé sans votre consentement.
+              </p>
+            </section>
           </div>
         </div>
       </section>
