@@ -10,7 +10,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Nos Projets | EOLIYA Ingénierie',
   description:
-    'Découvrez nos réalisations en électricité et éclairage : bureaux, commerces, hôtels, institutions. Plus de 250 projets réalisés avec excellence.',
+    'Découvrez nos réalisations pour des institutions et grands comptes : Conseil d\'État, Institut de France, VINCI Energies, Veepee, Barrière… Plus de 150 projets menés de l\'étude à la livraison.',
   keywords: [
     'projets électricité',
     'réalisations éclairage',
