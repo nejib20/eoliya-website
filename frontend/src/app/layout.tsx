@@ -1,44 +1,37 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer, MetaBar } from '@/components/layout';
 import { StructuredData } from '@/components/seo';
 import { globalSchemas } from '@/lib/structured-data';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
 export const metadata: Metadata = {
-  title: 'EOLIYA Ingénierie - Bureau d\'études et conseil en ingénierie du bâtiment | Paris',
-  description: 'Expert en ingénierie du bâtiment depuis 15 ans, EOLIYA propose conseil TCE, relamping LED, luminaires sur mesure et mise aux normes pour ERP. Devis gratuit.',
-  keywords: ['bureau d\'études bâtiment Paris', 'ingénierie tertiaire', 'relamping LED', 'luminaires sur mesure', 'TCE maîtrise d\'œuvre', 'mise aux normes ERP'],
-  authors: [{ name: 'Nejib Aloui' }],
-  creator: 'Nejib Aloui',
-  publisher: 'EOLIYA Ingénierie',
+  title: 'EOLIYA Ingenierie — Bureau d\'etudes et conseil en ingenierie du batiment | Paris',
+  description: 'Expert en ingenierie du batiment depuis 2009, EOLIYA propose conseil TCE, relamping LED, luminaires sur mesure, renovation et mise aux normes pour ERP. Devis gratuit.',
+  keywords: ['bureau d\'etudes batiment Paris', 'ingenierie tertiaire', 'relamping LED', 'luminaires sur mesure', 'TCE maitrise d\'oeuvre', 'mise aux normes ERP', 'renovation bureaux'],
+  authors: [{ name: 'EOLIYA Ingenierie' }],
+  creator: 'EOLIYA Ingenierie',
+  publisher: 'EOLIYA Ingenierie',
   metadataBase: new URL('https://eoliya.com'),
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://eoliya.com',
-    siteName: 'EOLIYA Ingénierie',
-    title: 'EOLIYA Ingénierie - Bureau d\'études et conseil en ingénierie du bâtiment',
-    description: 'Expert en ingénierie du bâtiment depuis 15 ans. Conseil TCE, relamping LED, luminaires sur mesure.',
+    siteName: 'EOLIYA Ingenierie',
+    title: 'EOLIYA Ingenierie — Bureau d\'etudes et conseil en ingenierie du batiment',
+    description: 'Expert en ingenierie du batiment depuis 2009. Conseil TCE, relamping LED, luminaires sur mesure, renovation.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'EOLIYA Ingénierie',
+        alt: 'EOLIYA Ingenierie',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EOLIYA Ingénierie - Bureau d\'études en ingénierie du bâtiment',
-    description: 'Expert en ingénierie du bâtiment depuis 15 ans. Conseil TCE, relamping LED, luminaires sur mesure.',
+    title: 'EOLIYA Ingenierie — Bureau d\'etudes en ingenierie du batiment',
+    description: 'Expert en ingenierie du batiment depuis 2009. Conseil TCE, relamping LED, luminaires sur mesure.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -52,9 +45,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 };
 
 export default function RootLayout({
@@ -63,13 +53,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr">
       <head>
         <StructuredData data={globalSchemas} />
       </head>
       <body className="antialiased">
+        <MetaBar />
         <Header />
-        <main className="min-h-screen">
+        <main>
           {children}
         </main>
         <Footer />

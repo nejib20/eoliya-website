@@ -9,3 +9,6 @@ export type { InputProps, TextareaProps, SelectProps } from './Input';
 
 export { Logo } from './Logo';
 export type { default as LogoProps } from './Logo';
+
+export { ProjectCard } from './ProjectCard';
+export type { Project } from './ProjectCard';

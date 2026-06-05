@@ -113,10 +113,10 @@ export default function EquipePage() {
               Notre philosophie d'équipe
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Chez EOLIYA, nous croyons que l'excellence naît de la complémentarité des talents.
-              Notre équipe réunit des profils variés — ingénieurs en électricité, spécialistes de
-              l'éclairage, chefs de projets expérimentés — qui partagent une même passion pour
-              l'ingénierie de qualité et le service client.
+              Chez EOLIYA, l'excellence naît de la complémentarité des talents.
+              Ingénieurs en électricité, spécialistes de l'éclairage et chefs de projets
+              expérimentés travaillent ensemble avec une même passion pour l'ingénierie
+              de qualité et le service client.
             </p>
             <div className="grid md:grid-cols-3 gap-8 mt-12">
               <div className="p-6 bg-gray-50 rounded-xl">

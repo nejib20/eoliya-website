@@ -1,122 +1,89 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Hero, Services } from '@/components/sections';
+import Link from 'next/link';
+import { Capacities, CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Nos Services - Conseil TCE, Relamping LED, Luminaires sur mesure | EOLIYA',
-  description: 'Découvrez nos services d\'ingénierie : conseil et pilotage TCE, maintenance et relamping LED, conception de luminaires techniques sur mesure.',
+  title: 'Nos Services — EOLIYA Ingenierie | Conseil TCE, Relamping LED, Luminaires sur mesure',
+  description: 'Decouvrez nos services d\'ingenierie : conseil et pilotage TCE, maintenance et relamping LED, conception de luminaires techniques sur mesure.',
 };
+
+const expertises = [
+  { title: 'Electricite courants forts et faibles', description: 'Distribution BT, tableaux, eclairage, reseaux VDI' },
+  { title: 'CVC (Chauffage, Ventilation, Climatisation)', description: 'Audits energetiques, maintenance, optimisation' },
+  { title: 'Securite incendie', description: 'SSI, desenfumage, eclairage de securite (BAES, LSC)' },
+  { title: 'Accessibilite PMR', description: 'Mise en conformite ERP, signaletique, cheminements' },
+  { title: 'Eclairage technique', description: 'Calculs photometriques, luminaires ATEX, solutions sur mesure' },
+  { title: 'Normes et reglementation', description: 'NFC 15-100, NFC 71-121, EN 12464, reglementation ERP' },
+];
 
 export default function ServicesPage() {
   return (
     <>
-      <Hero
-        title="Nos domaines d'intervention"
-        subtitle="Des solutions complètes et personnalisées pour tous vos projets d'ingénierie du bâtiment. De la conception à la réalisation, nous vous accompagnons à chaque étape."
-        primaryCta={{
-          label: 'Demander un devis',
-          href: '/contact',
-        }}
-      />
+      {/* Hero */}
+      <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
+        <div className="wrap">
+          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
+            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
+            <span>/</span>
+            <span className="text-ink">Services</span>
+          </div>
 
-      <Services />
+          <div className="eyebrow mb-[22px]">
+            <b>02</b> &nbsp;Services
+          </div>
 
-      {/* Additional Content */}
-      <section className="section bg-white">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-500 mb-6">
-              Une expertise transversale
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              EOLIYA Ingénierie intervient sur l'ensemble des corps d'état techniques du bâtiment
-            </p>
+          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em]">
+            Nos domaines <em className="italic text-laiton-deep">d&apos;intervention</em>.
+          </h1>
 
-            <div className="grid md:grid-cols-2 gap-6 text-left">
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  Électricité courants forts et faibles
+          <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[55ch]">
+            Des solutions completes et personnalisees pour tous vos projets d&apos;ingenierie du batiment. De la conception a la realisation, nous vous accompagnons a chaque etape.
+          </p>
+        </div>
+      </section>
+
+      {/* Capacities */}
+      <Capacities />
+
+      {/* Expertises transversales */}
+      <section className="py-[clamp(72px,9vw,140px)] bg-card border-t border-b border-line">
+        <div className="wrap">
+          <div className="eyebrow mb-5">
+            <b>Expertises transversales</b>
+          </div>
+          <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
+            Une maitrise complete des corps d&apos;etat techniques
+          </h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {expertises.map((expertise, index) => (
+              <div key={index} className="bg-paper border border-line p-[clamp(24px,3vw,36px)]">
+                <h3 className="font-display font-medium text-[clamp(18px,1.8vw,22px)] tracking-[-0.01em]">
+                  {expertise.title}
                 </h3>
-                <p className="text-gray-600">
-                  Distribution BT, tableaux, éclairage, réseaux VDI
+                <p className="mt-3 text-muted text-[15px] leading-relaxed">
+                  {expertise.description}
                 </p>
               </div>
-
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  CVC (Chauffage, Ventilation, Climatisation)
-                </h3>
-                <p className="text-gray-600">
-                  Audits énergétiques, maintenance, optimisation
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  Sécurité incendie
-                </h3>
-                <p className="text-gray-600">
-                  SSI, désenfumage, éclairage de sécurité (BAES, LSC)
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  Accessibilité PMR
-                </h3>
-                <p className="text-gray-600">
-                  Mise en conformité ERP, signalétique, cheminements
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  Éclairage technique
-                </h3>
-                <p className="text-gray-600">
-                  Calculs photométriques, luminaires ATEX, solutions sur mesure
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-secondary-500 mb-3">
-                  Normes et réglementation
-                </h3>
-                <p className="text-gray-600">
-                  NFC 15-100, NFC 71-121, EN 12464, réglementation ERP
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section section-alt">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary-500 mb-6">
-            Un projet spécifique ?
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Chaque projet est unique. Contactez-nous pour discuter de vos besoins et obtenir
-            une solution personnalisée.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors"
-            >
-              Contactez-nous
-            </a>
-            <a
-              href="tel:0134223012"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-primary-500 font-semibold rounded-lg border-2 border-primary-500 hover:bg-primary-50 transition-colors"
-            >
-              01 34 22 30 12
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTABand
+        eyebrow="Un projet specifique ?"
+        title="Discutons de vos besoins."
+        primaryCta={{
+          label: 'Demander un devis',
+          href: '/contact',
+        }}
+        secondaryCta={{
+          label: '01 34 22 30 12',
+          href: 'tel:0134223012',
+        }}
+      />
     </>
   );
 }

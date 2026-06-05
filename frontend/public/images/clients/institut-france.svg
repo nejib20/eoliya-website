@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="none">
+  <!-- Institut de France logo - Cultural institution -->
+  <g>
+    <!-- Dome/cupola representing the Institut building -->
+    <path d="M25 45 L25 35 L30 30 L35 35 L35 45 Z" fill="#2C3E50"/>
+    <path d="M23 45 L37 45 L37 48 L23 48 Z" fill="#34495E"/>
+    <ellipse cx="30" cy="30" rx="7" ry="5" fill="#2C3E50"/>
+    <text x="45" y="36" font-family="serif" font-size="13" font-weight="700" fill="#2C3E50">INSTITUT</text>
+    <text x="45" y="50" font-family="serif" font-size="13" font-weight="700" fill="#2C3E50">DE FRANCE</text>
+  </g>
+</svg>

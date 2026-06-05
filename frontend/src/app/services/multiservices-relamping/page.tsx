@@ -1,231 +1,186 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Hero } from '@/components/sections';
-import { Zap, Wrench, TrendingDown, Clock } from 'lucide-react';
-import { StructuredData } from '@/components/seo';
-import { serviceSchemas, generateBreadcrumbSchema } from '@/lib/structured-data';
+import Link from 'next/link';
+import { CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Multi-services et Relamping LED - Maintenance et transition énergétique | EOLIYA',
-  description: 'Maintenance électrique, dépannage 24/7 et solutions de relamping LED haute performance. Jusqu\'à 80% d\'économies d\'énergie garanties.',
+  title: 'Multi-services et Relamping LED — EOLIYA Ingenierie',
+  description: 'Maintenance electrique, depannage 24/7 et solutions de relamping LED haute performance. Jusqu\'a 80% d\'economies d\'energie garanties.',
 };
 
-const breadcrumb = generateBreadcrumbSchema([
-  { name: 'Accueil', url: 'https://eoliya.com' },
-  { name: 'Services', url: 'https://eoliya.com/services' },
-  { name: 'Relamping LED', url: 'https://eoliya.com/services/multiservices-relamping' },
-]);
+const avantages = [
+  { title: 'Jusqu\'a 80% d\'economies', description: 'Reduction drastique de votre facture d\'electricite liee a l\'eclairage.' },
+  { title: 'Duree de vie x5', description: 'Les LED durent 50 000h contre 10 000h pour les tubes fluocompacts.' },
+  { title: 'Qualite d\'eclairage', description: 'Rendu des couleurs optimal, pas de scintillement, allumage instantane.' },
+  { title: 'Maintenance reduite', description: 'Moins de pannes, moins d\'interventions, moins de gestion au quotidien.' },
+];
+
+const prestations = [
+  { title: 'Depannage electrique 24/7', description: 'Intervention rapide pour tous types de pannes electriques : disjonctions, coupures, defauts d\'eclairage. Hotline disponible pour nos clients sous contrat.' },
+  { title: 'Mise aux normes des installations', description: 'Diagnostic de conformite NFC 15-100, mise en securite des tableaux electriques, mise aux normes des circuits et protections.' },
+  { title: 'Remplacement par LED', description: 'Audit d\'eclairage, calculs photometriques, fourniture et pose de luminaires LED, gestion des dechets (DEEE). ROI moyen : 2 a 3 ans.' },
+  { title: 'Contrats de maintenance sur mesure', description: 'Maintenance preventive programmee, interventions correctives illimitees, gestion du parc de luminaires, reporting mensuel.' },
+];
+
+const stats = [
+  { value: '80%', label: 'Economies d\'energie moyennes' },
+  { value: '2-3 ans', label: 'Retour sur investissement' },
+  { value: '50 000h', label: 'Duree de vie LED' },
+];
 
 export default function MultiservicesRelampingPage() {
   return (
     <>
-      <StructuredData data={[serviceSchemas.relampingLed, breadcrumb]} />
+      {/* Hero */}
+      <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
+        <div className="wrap">
+          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
+            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
+            <span>/</span>
+            <Link href="/services" className="hover:text-ink transition-colors">Services</Link>
+            <span>/</span>
+            <span className="text-ink">Relamping LED</span>
+          </div>
 
-      <Hero
-        title="Multi-services, Multi-techniques et Relamping"
-        subtitle="Maintenance corrective et préventive de vos installations électriques, CVC et systèmes de sécurité. Accompagnement complet vers la transition énergétique LED."
-        primaryCta={{
-          label: 'Demander un devis',
-          href: '/contact',
-        }}
-      />
+          <div className="eyebrow mb-[22px]">
+            <b>02</b> &nbsp;Service
+          </div>
+
+          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em]">
+            Multi-services et <em className="italic text-laiton-deep">Relamping LED</em>.
+          </h1>
+
+          <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[55ch]">
+            Maintenance corrective et preventive de vos installations electriques, CVC et systemes de securite. Transition energetique LED avec economies garanties.
+          </p>
+        </div>
+      </section>
 
       {/* Introduction */}
-      <section className="section bg-white">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-3xl font-bold text-secondary-500 mb-6">
-            Maintenance et transition LED
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            EOLIYA intervient en maintenance corrective et préventive sur vos installations
-            électriques, CVC et systèmes de sécurité. Nous accompagnons également votre transition
-            énergétique grâce à nos solutions de relamping LED performantes.
-          </p>
-          <p className="text-lg text-gray-600">
-            Nos contrats de maintenance sur mesure s'adaptent à vos besoins spécifiques : dépannage
-            24/7, interventions programmées, gestion du parc de luminaires.
-          </p>
+      <section className="py-[clamp(72px,9vw,140px)]">
+        <div className="wrap">
+          <div className="max-w-[720px]">
+            <h2 className="font-display font-medium text-[clamp(26px,3vw,40px)] tracking-[-0.02em]">
+              Maintenance et transition LED
+            </h2>
+            <div className="mt-6 text-[clamp(16px,1.4vw,18px)] leading-relaxed text-ink-2 space-y-5">
+              <p>
+                EOLIYA intervient en maintenance corrective et preventive sur vos installations electriques, CVC et systemes de securite. Nous accompagnons egalement votre transition energetique grace a nos solutions de relamping LED performantes.
+              </p>
+              <p>
+                Nos contrats de maintenance sur mesure s&apos;adaptent a vos besoins specifiques : depannage 24/7, interventions programmees, gestion du parc de luminaires.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Avantages */}
-      <section className="section section-alt">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold text-secondary-500 mb-12 text-center">
-            Les avantages du relamping LED
+      <section className="py-[clamp(72px,9vw,140px)] bg-card border-t border-b border-line">
+        <div className="wrap">
+          <div className="eyebrow mb-5">
+            <b>Avantages du relamping LED</b>
+          </div>
+          <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
+            Des economies mesurables et durables
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingDown className="w-8 h-8 text-primary-500" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {avantages.map((avantage, index) => (
+              <div key={index} className="bg-paper border border-line p-[clamp(24px,3vw,36px)]">
+                <h3 className="font-display font-medium text-[clamp(18px,1.8vw,22px)] tracking-[-0.01em]">
+                  {avantage.title}
+                </h3>
+                <p className="mt-3 text-muted text-[15px] leading-relaxed">
+                  {avantage.description}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Jusqu'à 80% d'économies
-              </h3>
-              <p className="text-gray-600">
-                Réduction drastique de votre facture d'électricité liée à l'éclairage
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-primary-500" />
-              </div>
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Durée de vie x5
-              </h3>
-              <p className="text-gray-600">
-                Les LED durent 50 000h contre 10 000h pour les tubes fluocompacts
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8 text-primary-500" />
-              </div>
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Qualité d'éclairage
-              </h3>
-              <p className="text-gray-600">
-                Rendu des couleurs optimal, pas de scintillement, allumage instantané
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Wrench className="w-8 h-8 text-primary-500" />
-              </div>
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Maintenance réduite
-              </h3>
-              <p className="text-gray-600">
-                Moins de pannes, moins d'interventions, moins de gestion au quotidien
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="section bg-white">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-3xl font-bold text-secondary-500 mb-12 text-center">
-            Nos prestations
+      {/* Prestations */}
+      <section className="py-[clamp(72px,9vw,140px)]">
+        <div className="wrap">
+          <div className="eyebrow mb-5">
+            <b>Nos prestations</b>
+          </div>
+          <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[22ch] mb-[clamp(40px,5vw,64px)]">
+            Services de maintenance et relamping
           </h2>
 
-          <div className="space-y-6">
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Dépannage électrique 24/7
-              </h3>
-              <p className="text-gray-600">
-                Intervention rapide pour tous types de pannes électriques : disjonctions,
-                coupures, défauts d'éclairage. Hotline disponible pour nos clients sous contrat.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Mise aux normes des installations
-              </h3>
-              <p className="text-gray-600">
-                Diagnostic de conformité NFC 15-100, mise en sécurité des tableaux électriques,
-                mise aux normes des circuits et protections.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Remplacement par LED : jusqu'à 80% d'économies d'énergie
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Audit d'éclairage, calculs photométriques, fourniture et pose de luminaires LED,
-                gestion des déchets (DEEE). ROI moyen : 2 à 3 ans.
-              </p>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
-                <li>Bureaux et espaces tertiaires</li>
-                <li>Commerces et surfaces de vente</li>
-                <li>Entrepôts et zones industrielles</li>
-                <li>Parkings et circulations</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-secondary-500 mb-3">
-                Contrats de maintenance sur mesure
-              </h3>
-              <p className="text-gray-600">
-                Maintenance préventive programmée, interventions correctives illimitées, gestion du
-                parc de luminaires, reporting mensuel. Contrats annuels ou pluriannuels.
-              </p>
-            </div>
+          <div className="border-t border-line">
+            {prestations.map((prestation, index) => (
+              <div key={index} className="py-[clamp(24px,3vw,38px)] border-b border-line">
+                <div className="flex gap-[clamp(20px,3vw,48px)] items-start">
+                  <span className="font-mono text-sm text-laiton-deep tracking-[0.05em] flex-none mt-1">0{index + 1}</span>
+                  <div>
+                    <h3 className="font-display font-medium text-[clamp(21px,2.2vw,28px)] tracking-[-0.01em]">
+                      {prestation.title}
+                    </h3>
+                    <p className="mt-2.5 text-ink-2 text-[clamp(15px,1.3vw,17px)] leading-relaxed max-w-[56ch]">
+                      {prestation.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ROI */}
-      <section className="section section-alt">
-        <div className="container-custom max-w-4xl">
-          <div className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-8 md:p-12 text-white">
-            <h2 className="text-3xl font-bold mb-6 text-center">
-              Calculez vos économies potentielles
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">80%</div>
-                <div className="text-primary-100">Économies d'énergie moyennes</div>
+      {/* ROI Stats */}
+      <section className="py-[clamp(72px,9vw,140px)] bg-night text-paper">
+        <div className="wrap">
+          <div className="eyebrow mb-5 text-laiton">
+            <b>Retour sur investissement</b>
+          </div>
+          <h2 className="font-display font-medium text-[clamp(28px,3.6vw,52px)] leading-[1.04] tracking-[-0.02em] max-w-[24ch] mb-[clamp(40px,5vw,64px)]">
+            Calculez vos economies potentielles
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="font-display text-[clamp(48px,6vw,80px)] font-medium text-laiton tracking-[-0.02em]">
+                  {stat.value}
+                </div>
+                <div className="text-paper/70 text-[clamp(14px,1.2vw,16px)] mt-2">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">2-3 ans</div>
-                <div className="text-primary-100">Retour sur investissement</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">50 000h</div>
-                <div className="text-primary-100">Durée de vie LED</div>
-              </div>
-            </div>
-            <div className="text-center">
-              <p className="text-lg mb-6">
-                Un bâtiment de 1000 m² peut économiser jusqu'à 15 000€/an sur sa facture d'éclairage
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-500 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Demander un audit gratuit
-              </a>
-            </div>
+            ))}
+          </div>
+
+          <p className="text-center text-paper/80 text-[clamp(16px,1.4vw,18px)] leading-relaxed max-w-[48ch] mx-auto mb-8">
+            Un batiment de 1000 m² peut economiser jusqu&apos;a 15 000€/an sur sa facture d&apos;eclairage
+          </p>
+
+          <div className="text-center">
+            <Link
+              href="/contact"
+              className="btn bg-laiton text-night hover:bg-laiton-deep"
+            >
+              Demander un audit gratuit
+            </Link>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section bg-white">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl font-bold text-secondary-500 mb-6">
-            Prêt à réduire vos coûts énergétiques ?
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Nos ingénieurs réalisent un audit gratuit de votre installation et vous proposent une
-            solution personnalisée avec calcul de ROI.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors"
-            >
-              Demander un audit gratuit
-            </a>
-            <a
-              href="tel:0134223012"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-primary-500 font-semibold rounded-lg border-2 border-primary-500 hover:bg-primary-50 transition-colors"
-            >
-              01 34 22 30 12
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTABand
+        eyebrow="Pret a reduire vos couts energetiques ?"
+        title="Nos ingenieurs realisent un audit gratuit de votre installation."
+        primaryCta={{
+          label: 'Demander un audit',
+          href: '/contact',
+        }}
+        secondaryCta={{
+          label: '01 34 22 30 12',
+          href: 'tel:0134223012',
+        }}
+      />
     </>
   );
 }

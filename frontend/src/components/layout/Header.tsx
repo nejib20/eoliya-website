@@ -1,61 +1,55 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, Logo } from '@/components/ui';
+import Image from 'next/image';
 
 interface NavLink {
   label: string;
   href: string;
-  children?: NavLink[];
+  index: string;
 }
 
 const navigation: NavLink[] = [
-  { label: 'Accueil', href: '/' },
-  {
-    label: 'À propos',
-    href: '/a-propos',
-    children: [
-      { label: 'Notre histoire', href: '/a-propos' },
-      { label: 'Notre équipe', href: '/equipe' },
-    ],
-  },
-  {
-    label: 'Services',
-    href: '/services',
-    children: [
-      { label: 'Conseil et Pilotage TCE', href: '/services/conseil-pilotage' },
-      { label: 'Multi-services et Relamping', href: '/services/multiservices-relamping' },
-      { label: 'Luminaires sur mesure', href: '/services/luminaires-sur-mesure' },
-    ],
-  },
-  { label: 'Projets', href: '/projets' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Accueil', href: '/', index: '00' },
+  { label: 'A propos', href: '/a-propos', index: '01' },
+  { label: 'Services', href: '/services', index: '02' },
+  { label: 'Projets', href: '/projets', index: '03' },
+  { label: 'Blog', href: '/blog', index: '04' },
+  { label: 'Contact', href: '/contact', index: '05' },
 ];
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 8);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
-    setOpenDropdown(null);
   }, [pathname]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -63,180 +57,118 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-lg shadow-md'
-          : 'bg-white/90 backdrop-blur-sm'
-      }`}
-    >
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center focus-visible-ring">
-            <Logo className="h-12 w-auto" color="dark" />
-          </Link>
+    <>
+      <header
+        className={`sticky top-0 z-[60] transition-all duration-[400ms] ease-editorial ${
+          isScrolled
+            ? 'border-b border-line bg-paper/[0.92] backdrop-blur-[16px] backdrop-saturate-[140%]'
+            : 'border-b border-transparent bg-paper/[0.86] backdrop-blur-[16px] backdrop-saturate-[140%]'
+        }`}
+      >
+        <div className="wrap">
+          <div className="flex items-center justify-between h-[78px] gap-7">
+            {/* Brand */}
+            <Link href="/" className="flex items-center flex-none" aria-label="EOLIYA Ingenierie">
+              <Image
+                src="/images/eoliya-logo-sombre.png"
+                alt="EOLIYA Ingenierie"
+                width={120}
+                height={28}
+                className="h-7 w-auto"
+                priority
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navigation.map((link) => (
-              <div key={link.href} className="relative">
-                {link.children ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
-                    <button
-                      className={`flex items-center gap-1 px-4 py-2 text-base font-medium transition-colors rounded-lg focus-visible-ring ${
-                        isActive(link.href)
-                          ? 'text-primary-500'
-                          : 'text-secondary-600 hover:text-primary-500'
-                      }`}
-                    >
-                      {link.label}
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-
-                    <AnimatePresence>
-                      {openDropdown === link.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 py-2"
-                        >
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className={`block px-4 py-3 text-sm transition-colors hover:bg-gray-50 ${
-                                isActive(child.href)
-                                  ? 'text-primary-500 font-medium'
-                                  : 'text-secondary-600 hover:text-primary-500'
-                              }`}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className={`block px-4 py-2 text-base font-medium transition-colors rounded-lg focus-visible-ring ${
-                      isActive(link.href)
-                        ? 'text-primary-500'
-                        : 'text-secondary-600 hover:text-primary-500'
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navigation.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative font-mono text-xs tracking-[0.12em] uppercase py-2.5 px-3.5 whitespace-nowrap transition-colors duration-300 ease-editorial ${
+                    isActive(link.href)
+                      ? 'text-ink'
+                      : 'text-ink-2 hover:text-ink'
+                  }`}
+                >
+                  <span className="text-faint mr-1.5 text-[10px]">{link.index}</span>
+                  {link.label}
+                  <span
+                    className={`absolute left-3.5 right-3.5 bottom-1 h-px bg-laiton transition-transform duration-[400ms] ease-editorial origin-left ${
+                      isActive(link.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                     }`}
-                  >
-                    {link.label}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
+                  />
+                </Link>
+              ))}
+            </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Button href="/contact" variant="primary">
-              Devis gratuit
-            </Button>
-          </div>
+            {/* Actions */}
+            <div className="flex items-center gap-4">
+              <Link
+                href="/contact"
+                className="hidden lg:inline-flex btn ghost"
+              >
+                Devis gratuit <i>→</i>
+              </Link>
 
-          {/* Mobile Menu Button */}
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsOpen(true)}
+                className="lg:hidden icon-btn"
+                aria-label="Menu"
+              >
+                <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+                  <path d="M0 1h20M0 11h20" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-[90] bg-paper transform transition-transform duration-500 ease-editorial flex flex-col py-5.5 px-gutter ${
+          isOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        style={{ paddingInline: 'var(--gutter)' }}
+      >
+        <div className="flex justify-between items-center h-14">
+          <span className="mono text-muted">Menu</span>
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-secondary-600 hover:text-primary-500 focus-visible-ring rounded-lg"
-            aria-label="Menu"
+            onClick={() => setIsOpen(false)}
+            className="icon-btn"
+            aria-label="Fermer"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M1 1l14 14M15 1L1 15" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden border-t border-gray-100"
+        <nav className="flex flex-col mt-6">
+          {navigation.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="font-display font-medium text-[clamp(30px,9vw,44px)] tracking-[-0.02em] py-3.5 border-b border-line"
             >
-              <div className="py-4 space-y-1">
-                {navigation.map((link) => (
-                  <div key={link.href}>
-                    {link.children ? (
-                      <>
-                        <button
-                          onClick={() =>
-                            setOpenDropdown(
-                              openDropdown === link.label ? null : link.label
-                            )
-                          }
-                          className="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-secondary-600 hover:text-primary-500 hover:bg-gray-50 rounded-lg"
-                        >
-                          {link.label}
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform ${
-                              openDropdown === link.label ? 'rotate-180' : ''
-                            }`}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {openDropdown === link.label && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="ml-4 space-y-1"
-                            >
-                              {link.children.map((child) => (
-                                <Link
-                                  key={child.href}
-                                  href={child.href}
-                                  className={`block px-4 py-2 text-sm rounded-lg ${
-                                    isActive(child.href)
-                                      ? 'text-primary-500 bg-primary-50 font-medium'
-                                      : 'text-secondary-600 hover:text-primary-500 hover:bg-gray-50'
-                                  }`}
-                                >
-                                  {child.label}
-                                </Link>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className={`block px-4 py-3 text-base font-medium rounded-lg ${
-                          isActive(link.href)
-                            ? 'text-primary-500 bg-primary-50'
-                            : 'text-secondary-600 hover:text-primary-500 hover:bg-gray-50'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </div>
-                ))}
-                <div className="pt-4 px-4">
-                  <Button href="/contact" variant="primary" fullWidth>
-                    Devis gratuit
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+              <span className="font-mono text-sm text-laiton-deep mr-3.5">{link.index}</span>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <Link
+          href="/contact"
+          onClick={() => setIsOpen(false)}
+          className="btn mt-7.5"
+        >
+          Devis gratuit <i>→</i>
+        </Link>
+      </div>
+    </>
   );
 };
 

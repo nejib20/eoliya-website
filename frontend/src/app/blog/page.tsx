@@ -1,169 +1,179 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Hero } from '@/components/sections';
-import { Card } from '@/components/ui';
+import Link from 'next/link';
+import { CTABand } from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Blog et Actualités | EOLIYA Ingénierie',
-  description: 'Conseils, actualités et retours d\'expérience en ingénierie du bâtiment : TCE, LED, normes, réglementation ERP.',
+  title: 'Blog — EOLIYA Ingenierie | Le journal d\'EOLIYA',
+  description: 'Regards d\'experts sur l\'ingenierie du batiment, la transition energetique et la vie de nos chantiers.',
 };
 
-// Données de démonstration
-const articles = [
-  {
-    title: 'Relamping LED : 5 erreurs à éviter pour réussir votre transition',
-    excerpt: 'La transition vers l\'éclairage LED peut générer jusqu\'à 80% d\'économies d\'énergie. Découvrez les pièges à éviter pour un projet réussi.',
-    category: 'Relamping LED',
-    date: '15 mai 2026',
-    readTime: '5 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-  {
-    title: 'Accessibilité PMR : ce qui change avec la nouvelle réglementation ERP',
-    excerpt: 'Point sur les évolutions réglementaires 2026 en matière d\'accessibilité des établissements recevant du public.',
-    category: 'Réglementation',
-    date: '8 mai 2026',
-    readTime: '7 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-  {
-    title: 'TCE : quel est le rôle du technicien conseil en environnement ?',
-    excerpt: 'Comprendre les missions et la plus-value d\'un TCE dans un projet de construction ou de rénovation.',
-    category: 'TCE & Conseil',
-    date: '2 mai 2026',
-    readTime: '6 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-  {
-    title: 'Normes NFC 71-121 : tout savoir sur l\'éclairage de sécurité',
-    excerpt: 'Guide complet sur les obligations légales en matière d\'éclairage de sécurité (BAES, LSC, signalétique).',
-    category: 'Normes',
-    date: '25 avril 2026',
-    readTime: '8 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-  {
-    title: 'Luminaires sur mesure : quand opter pour une solution personnalisée ?',
-    excerpt: 'Contraintes architecturales, environnements ATEX, besoins spécifiques : quand le sur-mesure devient nécessaire.',
-    category: 'Luminaires',
-    date: '18 avril 2026',
-    readTime: '5 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-  {
-    title: 'Audit énergétique : 7 postes d\'optimisation souvent négligés',
-    excerpt: 'Au-delà de l\'éclairage, découvrez les leviers d\'économie d\'énergie à ne pas manquer dans vos bâtiments.',
-    category: 'Efficacité énergétique',
-    date: '10 avril 2026',
-    readTime: '6 min',
-    image: '/images/blog/placeholder.jpg',
-  },
-];
+interface Article {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+}
 
-const categories = [
-  'Tous',
-  'Relamping LED',
-  'TCE & Conseil',
-  'Normes',
-  'Réglementation',
-  'Luminaires',
-  'Efficacité énergétique',
+const featuredArticle: Article = {
+  slug: 'decret-tertiaire',
+  title: 'Decret tertiaire : transformer une obligation en economies',
+  excerpt: '40% de consommation en moins d\'ici 2030. Derriere la contrainte reglementaire se cachent des leviers tres concrets, du relamping LED au pilotage technique, pour reduire la facture sans tout reconstruire.',
+  category: 'Transition energetique',
+  date: '28 mai 2026',
+  readTime: '3 min de lecture',
+};
+
+const articles: Article[] = [
+  {
+    slug: 'relamping-led',
+    title: 'Relamping LED : bien plus qu\'un changement d\'ampoule',
+    excerpt: 'Le relamping ne se resume pas a remplacer des sources. Pense comme un projet, il combine economies d\'energie, confort visuel et maintenance allegee sur la duree.',
+    category: 'Eclairage',
+    date: '14 mai 2026',
+    readTime: '3 min',
+  },
+  {
+    slug: 'decret-bacs',
+    title: 'Decret BACS : pourquoi piloter, c\'est deja economiser',
+    excerpt: 'La GTB devient obligatoire par paliers de puissance. Au-dela de la conformite, automatiser le chauffage, la ventilation et l\'eclairage fait baisser la consommation des la premiere annee.',
+    category: 'Pilotage',
+    date: '2 mai 2026',
+    readTime: '3 min',
+  },
+  {
+    slug: 'renovation-site-occupe',
+    title: 'Renover un site tertiaire sans interrompre l\'activite',
+    excerpt: 'Travailler en site occupe impose un phasage millimetre. Un interlocuteur unique et une coordination tous corps d\'etat evitent les arrets d\'exploitation.',
+    category: 'Renovation',
+    date: '22 avril 2026',
+    readTime: '2 min',
+  },
+  {
+    slug: 'space-planning',
+    title: 'Space planning : amenager pour la performance et le bien-etre',
+    excerpt: 'Densite, acoustique, lumiere, flexibilite. L\'agencement d\'un espace de travail se concoit comme un systeme ou chaque metre carre sert l\'usage et le confort.',
+    category: 'Amenagement',
+    date: '9 avril 2026',
+    readTime: '2 min',
+  },
+  {
+    slug: 'equipement-medical',
+    title: 'Equipement medical : concevoir des espaces de sante conformes',
+    excerpt: 'Hygiene, fluides, normes electriques, ergonomie des soins. L\'installation d\'equipements de sante conjugue exigences techniques et realite du terrain.',
+    category: 'Sante',
+    date: '27 mars 2026',
+    readTime: '3 min',
+  },
 ];
 
 export default function BlogPage() {
   return (
     <>
-      <Hero
-        title="Actualités et conseils"
-        subtitle="Retrouvez nos articles, guides pratiques et retours d'expérience pour vous accompagner dans vos projets d'ingénierie du bâtiment."
-        primaryCta={{
-          label: 'S\'abonner à la newsletter',
-          href: '#newsletter',
-        }}
-      />
-
-      {/* Filters */}
-      <section className="section bg-white pt-12">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className="px-6 py-2 rounded-full border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors font-medium text-sm"
-              >
-                {category}
-              </button>
-            ))}
+      {/* Hero */}
+      <section className="border-b border-line py-[clamp(48px,6vw,88px)] pb-[clamp(28px,3.5vw,48px)]">
+        <div className="wrap">
+          <div className="flex items-center gap-2 text-sm text-muted mb-[22px]">
+            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
+            <span>/</span>
+            <span className="text-ink">Blog</span>
           </div>
 
-          {/* Articles Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article, index) => (
-              <Card key={index} variant="default">
-                <div className="aspect-video bg-gradient-to-br from-primary-100 to-accent-100 rounded-xl mb-4 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">Image article</span>
+          <div className="eyebrow mb-[22px]">
+            <b>04</b> &nbsp;Blog
+          </div>
+
+          <h1 className="font-display font-medium text-[clamp(38px,5.4vw,72px)] leading-[1.02] tracking-[-0.022em]">
+            Le journal <em className="italic text-laiton-deep">d&apos;EOLIYA</em>.
+          </h1>
+
+          <p className="mt-[clamp(20px,2.5vw,32px)] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[60ch]">
+            Regards d&apos;experts sur l&apos;ingenierie du batiment, la transition energetique et la vie de nos chantiers.
+          </p>
+        </div>
+      </section>
+
+      {/* Featured Article */}
+      <section className="border-t border-b border-line py-[clamp(40px,5vw,72px)]">
+        <div className="wrap">
+          <Link
+            href={`/blog/${featuredArticle.slug}`}
+            className="grid grid-cols-[auto_1fr] max-md:grid-cols-1 gap-[clamp(28px,5vw,72px)] items-start group"
+          >
+            <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-laiton-deep writing-mode-vertical-rl transform rotate-180 self-stretch pt-1 max-md:writing-mode-horizontal max-md:transform-none">
+              A la une
+            </div>
+            <div>
+              <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-laiton-deep">
+                {featuredArticle.category}
+              </div>
+              <h2 className="font-display font-medium text-[clamp(30px,4.4vw,60px)] leading-[1.04] tracking-[-0.022em] mt-4 max-w-[18ch] transition-colors duration-300 group-hover:text-laiton-deep">
+                {featuredArticle.title}
+              </h2>
+              <p className="mt-[22px] text-[clamp(17px,1.6vw,20px)] leading-relaxed text-ink-2 max-w-[60ch]">
+                {featuredArticle.excerpt}
+              </p>
+              <div className="mt-[22px] font-mono text-[11.5px] tracking-[0.06em] text-muted flex gap-4">
+                <span>{featuredArticle.date}</span>
+                <span>{featuredArticle.readTime}</span>
+              </div>
+              <span className="tlink mt-7 inline-block">
+                Lire l&apos;article <i>→</i>
+              </span>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Articles Grid */}
+      <section className="py-[clamp(16px,3vw,40px)] pb-[clamp(48px,6vw,96px)]">
+        <div className="wrap">
+          <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
+            {articles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/blog/${article.slug}`}
+                className="block p-[clamp(28px,3vw,44px)] border-b border-r border-line last:border-r-0 transition-colors duration-[350ms] ease-editorial hover:bg-paper-2 group [&:nth-child(3n)]:border-r-0 max-lg:[&:nth-child(3n)]:border-r max-lg:[&:nth-child(2n)]:border-r-0 max-md:border-r-0"
+                style={{ borderTop: 'none' }}
+              >
+                <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-laiton-deep">
+                  {article.category}
                 </div>
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-semibold text-primary-500 uppercase">
-                    {article.category}
-                  </span>
-                  <span className="text-xs text-gray-500">•</span>
-                  <span className="text-xs text-gray-500">{article.date}</span>
-                  <span className="text-xs text-gray-500">•</span>
-                  <span className="text-xs text-gray-500">{article.readTime}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-secondary-500 mb-3 leading-tight">
+                <h3 className="font-display font-medium text-[clamp(21px,2vw,26px)] leading-[1.14] tracking-[-0.015em] mt-[14px]">
                   {article.title}
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="mt-[14px] text-muted text-[14.5px] leading-[1.62]">
                   {article.excerpt}
                 </p>
-                <a
-                  href="#"
-                  className="text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-2"
-                >
-                  Lire la suite
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </Card>
+                <div className="mt-[22px] flex items-center justify-between gap-3">
+                  <span className="font-mono text-[10.5px] tracking-[0.05em] text-faint">
+                    {article.date} · {article.readTime}
+                  </span>
+                  <span className="font-mono text-[15px] text-laiton-deep opacity-0 -translate-x-1.5 transition-all duration-[350ms] ease-editorial group-hover:opacity-100 group-hover:translate-x-0">
+                    →
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section id="newsletter" className="section section-alt">
-        <div className="container-custom max-w-3xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary-500 mb-6">
-            Restez informé
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Recevez nos actualités, conseils techniques et retours d'expérience directement
-            dans votre boîte mail (1 envoi par trimestre maximum).
-          </p>
-
-          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-            <input
-              type="email"
-              placeholder="Votre email professionnel"
-              className="flex-1 px-6 py-4 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:outline-none"
-              required
-            />
-            <button
-              type="submit"
-              className="px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors"
-            >
-              S'abonner
-            </button>
-          </form>
-
-          <p className="text-sm text-gray-500 mt-4">
-            Conformément au RGPD, vous pouvez vous désabonner à tout moment.
-          </p>
-        </div>
-      </section>
+      {/* CTA */}
+      <CTABand
+        eyebrow="Une question technique ?"
+        title="Nos ingenieurs vous repondent."
+        primaryCta={{
+          label: 'Poser une question',
+          href: '/contact',
+        }}
+        secondaryCta={{
+          label: '01 34 22 30 12',
+          href: 'tel:0134223012',
+        }}
+      />
     </>
   );
 }

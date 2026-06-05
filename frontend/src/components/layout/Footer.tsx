@@ -1,26 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
-import { Logo } from '@/components/ui';
+import Image from 'next/image';
 
 const services = [
-  { label: 'Conseil et Pilotage TCE', href: '/services/conseil-pilotage' },
-  { label: 'Multi-services et Relamping', href: '/services/multiservices-relamping' },
-  { label: 'Luminaires sur mesure', href: '/services/luminaires-sur-mesure' },
+  { label: 'Conseil & Pilotage TCE', href: '/services#svc-tce' },
+  { label: 'Multi-services & Relamping', href: '/services#svc-relamping' },
+  { label: 'Luminaires sur mesure', href: '/services#svc-luminaires' },
+  { label: 'Renovation & second oeuvre', href: '/services#svc-renovation' },
+  { label: 'Amenagement & space planning', href: '/services#svc-amenagement' },
+  { label: 'Equipement medical', href: '/services#svc-medical' },
 ];
 
 const links = [
   { label: 'Accueil', href: '/' },
-  { label: 'À propos', href: '/a-propos' },
-  { label: 'Notre équipe', href: '/equipe' },
+  { label: 'A propos', href: '/a-propos' },
   { label: 'Projets', href: '/projets' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
 const legal = [
-  { label: 'Mentions légales', href: '/mentions-legales' },
-  { label: 'Politique de confidentialité', href: '/politique-confidentialite' },
+  { label: 'Mentions legales', href: '/mentions-legales' },
+  { label: 'Confidentialite', href: '/confidentialite' },
   { label: 'CGV', href: '/cgv' },
 ];
 
@@ -28,41 +29,43 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-secondary-800 text-white">
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Column 1: Logo & Description */}
+    <footer className="bg-night-2 text-night-ink/[0.66] py-section pb-7.5">
+      <div className="wrap">
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand Column */}
           <div>
-            <div className="mb-4">
-              <Logo className="h-12 w-auto" color="light" />
-            </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Expert en ingénierie du bâtiment depuis 15 ans. Bureau d'études, conseil TCE, relamping LED et luminaires sur mesure.
+            <Image
+              src="/images/eoliya-logo-blanc.png"
+              alt="EOLIYA Ingenierie"
+              width={180}
+              height={46}
+              className="h-[46px] w-auto"
+            />
+            <p className="mt-5.5 text-sm leading-relaxed max-w-[32ch] text-night-ink/[0.55]">
+              Expert en ingenierie du batiment depuis 2009. Pilotage TCE, relamping LED, luminaires sur mesure, renovation, amenagement et equipement medical, de l'etude a la livraison.
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://linkedin.com/company/eoliya"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-secondary-700 hover:bg-primary-500 flex items-center justify-center transition-colors focus-visible-ring"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <a
+              href="https://linkedin.com/company/eoliya"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-5 font-mono text-[11px] tracking-[0.1em] text-laiton-light whitespace-nowrap"
+            >
+              LinkedIn
+            </a>
           </div>
 
-          {/* Column 2: Services */}
+          {/* Services Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
+            <h4 className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-night-ink/[0.4] font-medium">
               Services
-            </h3>
-            <ul className="space-y-3">
+            </h4>
+            <ul className="mt-4.5 flex flex-col gap-3">
               {services.map((service) => (
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-gray-300 hover:text-white transition-colors focus-visible-ring inline-block"
+                    className="text-sm text-night-ink/[0.7] hover:text-laiton-light transition-colors duration-300"
                   >
                     {service.label}
                   </Link>
@@ -71,17 +74,17 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Navigation */}
+          {/* Navigation Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
+            <h4 className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-night-ink/[0.4] font-medium">
               Navigation
-            </h3>
-            <ul className="space-y-3">
+            </h4>
+            <ul className="mt-4.5 flex flex-col gap-3">
               {links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors focus-visible-ring inline-block"
+                    className="text-sm text-night-ink/[0.7] hover:text-laiton-light transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -90,28 +93,26 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Contact Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
+            <h4 className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-night-ink/[0.4] font-medium">
               Contact
-            </h3>
-            <ul className="space-y-4">
+            </h4>
+            <ul className="mt-4.5 flex flex-col gap-3">
               <li>
                 <a
                   href="tel:0134223012"
-                  className="flex items-start gap-3 text-gray-300 hover:text-white transition-colors focus-visible-ring"
+                  className="text-sm text-night-ink/[0.7] hover:text-laiton-light transition-colors duration-300"
                 >
-                  <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>01 34 22 30 12</span>
+                  01 34 22 30 12
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:contact@eoliya.com"
-                  className="flex items-start gap-3 text-gray-300 hover:text-white transition-colors focus-visible-ring"
+                  className="text-sm text-night-ink/[0.7] hover:text-laiton-light transition-colors duration-300"
                 >
-                  <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>contact@eoliya.com</span>
+                  contact@eoliya.com
                 </a>
               </li>
               <li>
@@ -119,37 +120,36 @@ export const Footer: React.FC = () => {
                   href="https://maps.google.com/?q=131+Boulevard+Pereire+75017+Paris"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-gray-300 hover:text-white transition-colors focus-visible-ring"
+                  className="text-sm text-night-ink/[0.7] hover:text-laiton-light transition-colors duration-300"
                 >
-                  <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>
-                    131 Boulevard Pereire
-                    <br />
-                    75017 Paris
-                  </span>
+                  131 Bd Pereire, 75017 Paris
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-secondary-700">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm text-center md:text-left">
-              &copy; {currentYear} EOLIYA Ingénierie. Tous droits réservés.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              {legal.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-400 hover:text-white text-sm transition-colors focus-visible-ring"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+        {/* Big Wordmark */}
+        <div
+          className="mt-[clamp(40px,5vw,70px)] text-center font-display font-medium text-[clamp(70px,20vw,320px)] leading-[0.8] tracking-[-0.03em] text-night-ink/[0.05] select-none"
+          aria-hidden="true"
+        >
+          EOLIYA
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-[clamp(48px,6vw,80px)] pt-6 border-t border-line-night flex flex-col sm:flex-row justify-between items-center gap-4.5 flex-wrap font-mono text-[11px] tracking-[0.08em] text-night-ink/[0.45]">
+          <span>© {currentYear} EOLIYA Ingenierie. Tous droits reserves</span>
+          <div className="flex gap-5.5 flex-wrap">
+            {legal.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hover:text-laiton-light transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

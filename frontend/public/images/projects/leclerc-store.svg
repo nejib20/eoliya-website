@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#dbeafe"/>
+
+  <!-- Store building -->
+  <rect x="100" y="200" width="600" height="320" fill="#475569" rx="8"/>
+
+  <!-- Roof -->
+  <path d="M80 200 L400 100 L720 200 Z" fill="#334155"/>
+
+  <!-- Large glass facade -->
+  <rect x="150" y="240" width="500" height="240" fill="#60a5fa" opacity="0.4" rx="6"/>
+
+  <!-- Store sections with optimized lighting -->
+  <g opacity="0.8">
+    <!-- Section 1 - Bright LED -->
+    <rect x="160" y="250" width="140" height="100" fill="#fde047" rx="4"/>
+    <text x="230" y="305" font-family="Arial" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">LED</text>
+
+    <!-- Section 2 - Energy efficient -->
+    <rect x="320" y="250" width="140" height="100" fill="#a3e635" rx="4"/>
+    <text x="390" y="305" font-family="Arial" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">ECO</text>
+
+    <!-- Section 3 - Optimized -->
+    <rect x="480" y="250" width="140" height="100" fill="#34d399" rx="4"/>
+    <text x="550" y="305" font-family="Arial" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">OPT</text>
+  </g>
+
+  <!-- Energy savings graph overlay -->
+  <g>
+    <rect x="160" y="370" width="460" height="100" fill="#1e293b" opacity="0.1" rx="4"/>
+    <!-- Bar graph showing energy optimization -->
+    <rect x="180" y="420" width="40" height="40" fill="#ef4444" opacity="0.7"/>
+    <rect x="240" y="400" width="40" height="60" fill="#f97316" opacity="0.7"/>
+    <rect x="300" y="380" width="40" height="80" fill="#fbbf24" opacity="0.7"/>
+    <rect x="360" y="360" width="40" height="100" fill="#a3e635" opacity="0.7"/>
+    <rect x="420" y="340" width="40" height="120" fill="#10b981" opacity="0.7"/>
+
+    <!-- Trend arrow -->
+    <path d="M480 420 L560 360 M560 360 L540 365 M560 360 L555 380" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Energy efficiency badge -->
+  <g>
+    <circle cx="680" cy="130" r="45" fill="#10b981" opacity="0.2"/>
+    <text x="680" y="125" font-family="Arial" font-size="24" fill="#10b981" text-anchor="middle" font-weight="bold">A+</text>
+    <text x="680" y="145" font-family="Arial" font-size="10" fill="#10b981" text-anchor="middle">ENERGY</text>
+  </g>
+
+  <!-- Parking lot lights -->
+  <g opacity="0.6">
+    <rect x="120" y="530" width="15" height="40" fill="#64748b"/>
+    <circle cx="127.5" cy="525" r="8" fill="#fde047"/>
+
+    <rect x="300" y="530" width="15" height="40" fill="#64748b"/>
+    <circle cx="307.5" cy="525" r="8" fill="#fde047"/>
+
+    <rect x="480" y="530" width="15" height="40" fill="#64748b"/>
+    <circle cx="487.5" cy="525" r="8" fill="#fde047"/>
+
+    <rect x="660" y="530" width="15" height="40" fill="#64748b"/>
+    <circle cx="667.5" cy="525" r="8" fill="#fde047"/>
+  </g>
+</svg>

@@ -1,154 +1,223 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import Link from 'next/link';
 
-interface HeroProps {
-  title: string;
-  subtitle: string;
-  primaryCta?: {
-    label: string;
-    href: string;
-  };
-  secondaryCta?: {
-    label: string;
-    href: string;
-  };
-  imageSrc?: string;
-  imageAlt?: string;
+interface StatItem {
+  value: string;
+  suffix?: string;
+  label: string;
+  animate?: boolean; // Whether to animate this stat
 }
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+const stats: StatItem[] = [
+  { value: '2009', label: 'annee de creation', animate: false },
+  { value: '150', suffix: '+', label: 'projets realises', animate: true },
+  { value: '80', suffix: '%', label: 'd\'economies LED', animate: true },
+];
+
+// Custom hook for count-up animation
+const useCountUp = (end: number, duration: number = 2000, shouldAnimate: boolean = true, hasStarted: boolean = false) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+
+  const easeOutExpo = (t: number): number => {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  };
+
+  useEffect(() => {
+    if (!shouldAnimate || !hasStarted) {
+      setCount(end);
+      return;
+    }
+
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutExpo(progress);
+      const currentCount = Math.floor(easedProgress * end);
+
+      if (currentCount !== countRef.current) {
+        countRef.current = currentCount;
+        setCount(currentCount);
+      }
+
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [end, duration, shouldAnimate, hasStarted]);
+
+  return count;
 };
 
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
+// Animated stat component
+const AnimatedStat: React.FC<{ stat: StatItem; index: number; hasStarted: boolean }> = ({ stat, index, hasStarted }) => {
+  const numericValue = parseInt(stat.value, 10);
+  const animatedValue = useCountUp(numericValue, 2000, stat.animate, hasStarted);
+  const displayValue = stat.animate ? animatedValue : stat.value;
 
-export const Hero: React.FC<HeroProps> = ({
-  title,
-  subtitle,
-  primaryCta,
-  secondaryCta,
-  imageSrc,
-  imageAlt,
-}) => {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0, 102, 204) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
+    <div
+      className="py-[26px] pr-[clamp(28px,3vw,52px)] mr-[clamp(28px,3vw,52px)] border-r border-night-ink/[0.18] last:border-r-0 last:mr-0 last:pr-0 max-md:border-r-0 max-md:border-b max-md:mr-0 max-md:pr-0 max-md:last:border-b-0"
+    >
+      <div className="font-display font-medium text-[clamp(34px,3.4vw,48px)] leading-none tracking-[-0.02em] text-night-ink">
+        {displayValue}
+        {stat.suffix && <small className="text-[0.5em] text-laiton-light">{stat.suffix}</small>}
       </div>
-
-      <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-            className="text-center lg:text-left"
-          >
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-500 mb-6 leading-tight"
-            >
-              {title}
-            </motion.h1>
-
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
-            >
-              {subtitle}
-            </motion.p>
-
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              {primaryCta && (
-                <Button
-                  href={primaryCta.href}
-                  variant="primary"
-                  size="lg"
-                  icon={ArrowRight}
-                >
-                  {primaryCta.label}
-                </Button>
-              )}
-              {secondaryCta && (
-                <Button
-                  href={secondaryCta.href}
-                  variant="secondary"
-                  size="lg"
-                >
-                  {secondaryCta.label}
-                </Button>
-              )}
-            </motion.div>
-          </motion.div>
-
-          {/* Image */}
-          {imageSrc && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={imageSrc}
-                  alt={imageAlt || 'Hero image'}
-                  className="w-full h-auto object-cover"
-                />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-transparent" />
-              </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary-500/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent-500/10 rounded-full blur-3xl" />
-            </motion.div>
-          )}
-        </div>
+      <div className="mt-3 font-mono text-[11px] tracking-[0.1em] uppercase text-night-muted">
+        {stat.label}
       </div>
+    </div>
+  );
+};
 
-      {/* Decorative wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          className="w-full h-12 text-white"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
+export const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [hasAnimationStarted, setHasAnimationStarted] = useState(false);
+
+  // Video autoplay effect
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const kick = () => {
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+
+    if (video.readyState >= 2) kick();
+    video.addEventListener('loadeddata', kick);
+    video.addEventListener('canplay', kick);
+
+    const handleVisibility = () => {
+      if (!document.hidden) kick();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('pageshow', kick);
+
+    return () => {
+      video.removeEventListener('loadeddata', kick);
+      video.removeEventListener('canplay', kick);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('pageshow', kick);
+    };
+  }, []);
+
+  // Intersection Observer for count-up animation
+  useEffect(() => {
+    const statsElement = statsRef.current;
+    if (!statsElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimationStarted) {
+            setHasAnimationStarted(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(statsElement);
+
+    return () => observer.disconnect();
+  }, [hasAnimationStarted]);
+
+  return (
+    <section className="relative border-b border-line overflow-hidden isolate">
+      <div className="min-h-[clamp(600px,92vh,1000px)] flex items-stretch bg-night">
+        {/* Video Background */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/images/hero-poster.jpg"
         >
-          <path
-            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-            opacity=".25"
-            fill="currentColor"
-          />
-          <path
-            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-            opacity=".5"
-            fill="currentColor"
-          />
-          <path
-            d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-            fill="currentColor"
-          />
-        </svg>
+          <source src="/videos/eoliya-hero-loop.mp4" type="video/mp4" />
+        </video>
+
+        {/* Gradient Veil */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background: `
+              linear-gradient(90deg,
+                rgba(8,10,14,0.92) 0%,
+                rgba(8,10,14,0.78) 26%,
+                rgba(8,10,14,0.46) 52%,
+                rgba(8,10,14,0.12) 76%,
+                rgba(8,10,14,0.02) 100%),
+              linear-gradient(0deg, rgba(8,10,14,0.55) 0%, rgba(8,10,14,0.0) 38%)
+            `
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] flex flex-col justify-end text-night-ink">
+          <div>
+            <div className="eyebrow text-night-muted">
+              <b className="text-laiton-light">00</b> &nbsp;Ingenierie du batiment
+            </div>
+
+            <h1 className="text-[clamp(40px,5.4vw,88px)] leading-[1.02] tracking-[-0.022em] mt-[clamp(22px,3vw,40px)] max-w-[15ch] text-night-ink font-display font-medium" style={{ textShadow: '0 2px 30px rgba(0,0,0,0.35)' }}>
+              Des solutions d&apos;ingenierie <em className="text-laiton-light italic">sur&nbsp;mesure</em> pour vos projets tertiaires et industriels
+            </h1>
+
+            <p className="mt-[clamp(24px,2.6vw,34px)] max-w-[50ch] text-[clamp(16px,1.3vw,18.5px)] text-night-ink/[0.82] leading-[1.65]" style={{ textShadow: '0 1px 16px rgba(0,0,0,0.3)' }}>
+              Depuis 2009, EOLIYA Ingenierie accompagne entreprises et institutions dans leurs projets d&apos;amenagement, de mise aux normes et d&apos;optimisation energetique. De la conception a la realisation, nous mettons notre expertise au service de vos ambitions.
+            </p>
+
+            <div className="mt-9 flex gap-[26px] items-center flex-wrap">
+              <Link href="/contact" className="btn on-night">
+                Parlons de votre projet <i>→</i>
+              </Link>
+              <Link href="/services" className="tlink on-night">
+                Decouvrir nos services <i>→</i>
+              </Link>
+            </div>
+          </div>
+
+          {/* Stats Ledger */}
+          <div
+            ref={statsRef}
+            className="grid grid-cols-3 max-md:grid-cols-1 gap-0 border-t border-night-ink/[0.18] mt-[clamp(40px,5vw,64px)]"
+          >
+            {stats.map((stat, index) => (
+              <AnimatedStat
+                key={index}
+                stat={stat}
+                index={index}
+                hasStarted={hasAnimationStarted}
+              />
+            ))}
+          </div>
+
+          {/* Tag */}
+          <div className="mt-[clamp(32px,4vw,52px)] font-mono text-[11px] tracking-[0.14em] uppercase text-night-ink/[0.62] flex items-center gap-3">
+            <span className="w-[26px] h-px bg-laiton-light inline-block" />
+            Hall tertiaire, mise en lumiere EOLIYA
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="modernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#312e81;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1b4b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#modernGradient)"/>
+
+  <!-- Modern office building -->
+  <rect x="200" y="100" width="400" height="430" fill="#1e293b" rx="12"/>
+
+  <!-- Glass facade effect -->
+  <rect x="220" y="120" width="360" height="390" fill="#3b82f6" opacity="0.15" rx="8"/>
+
+  <!-- Custom lighting design - Artistic patterns -->
+  <g opacity="0.9">
+    <!-- Vertical light strips -->
+    <rect x="240" y="130" width="20" height="380" fill="#fbbf24" rx="10"/>
+    <rect x="380" y="130" width="20" height="380" fill="#f59e0b" rx="10"/>
+    <rect x="520" y="130" width="20" height="380" fill="#fbbf24" rx="10"/>
+
+    <!-- Horizontal accent lights -->
+    <rect x="270" y="160" width="90" height="8" fill="#a78bfa" rx="4"/>
+    <rect x="410" y="200" width="90" height="8" fill="#c084fc" rx="4"/>
+    <rect x="270" y="240" width="90" height="8" fill="#a78bfa" rx="4"/>
+    <rect x="410" y="280" width="90" height="8" fill="#c084fc" rx="4"/>
+    <rect x="270" y="320" width="90" height="8" fill="#a78bfa" rx="4"/>
+    <rect x="410" y="360" width="90" height="8" fill="#c084fc" rx="4"/>
+    <rect x="270" y="400" width="90" height="8" fill="#a78bfa" rx="4"/>
+    <rect x="410" y="440" width="90" height="8" fill="#c084fc" rx="4"/>
+  </g>
+
+  <!-- Modern workspace lighting zones -->
+  <g>
+    <!-- Zone 1 - Creative space -->
+    <rect x="270" y="170" width="80" height="60" fill="#ec4899" opacity="0.3" rx="4"/>
+    <circle cx="310" cy="200" r="12" fill="#fde047"/>
+
+    <!-- Zone 2 - Collaboration area -->
+    <rect x="410" y="210" width="80" height="60" fill="#8b5cf6" opacity="0.3" rx="4"/>
+    <circle cx="450" cy="240" r="12" fill="#fde047"/>
+
+    <!-- Zone 3 - Focus area -->
+    <rect x="270" y="250" width="80" height="60" fill="#06b6d4" opacity="0.3" rx="4"/>
+    <circle cx="310" cy="280" r="12" fill="#fde047"/>
+
+    <!-- Zone 4 - Meeting space -->
+    <rect x="410" y="290" width="80" height="60" fill="#10b981" opacity="0.3" rx="4"/>
+    <circle cx="450" cy="320" r="12" fill="#fde047"/>
+
+    <!-- Zone 5 - Lounge -->
+    <rect x="270" y="330" width="80" height="60" fill="#f59e0b" opacity="0.3" rx="4"/>
+    <circle cx="310" cy="360" r="12" fill="#fde047"/>
+
+    <!-- Zone 6 - Reception -->
+    <rect x="410" y="370" width="80" height="60" fill="#ef4444" opacity="0.3" rx="4"/>
+    <circle cx="450" cy="400" r="12" fill="#fde047"/>
+  </g>
+
+  <!-- Custom lighting control icon -->
+  <g>
+    <rect x="650" y="150" width="80" height="80" fill="#1e293b" rx="8" opacity="0.8"/>
+    <circle cx="690" cy="180" r="8" fill="#10b981"/>
+    <rect x="660" y="200" width="60" height="4" fill="#94a3b8" rx="2"/>
+    <circle cx="700" cy="202" r="6" fill="#fbbf24"/>
+    <rect x="660" y="215" width="60" height="4" fill="#94a3b8" rx="2"/>
+    <circle cx="680" cy="217" r="6" fill="#fbbf24"/>
+  </g>
+
+  <!-- Design excellence badge -->
+  <g>
+    <circle cx="120" cy="300" r="50" fill="#1e293b" opacity="0.8"/>
+    <path d="M95 300 L110 315 L145 280" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="120" y="340" font-family="Arial" font-size="10" fill="#fbbf24" text-anchor="middle" font-weight="bold">CUSTOM</text>
+  </g>
+
+  <!-- Ambient glow effects -->
+  <g opacity="0.5">
+    <circle cx="300" cy="200" r="30" fill="#fbbf24" opacity="0.2"/>
+    <circle cx="450" cy="320" r="40" fill="#a78bfa" opacity="0.2"/>
+    <circle cx="350" cy="400" r="35" fill="#ec4899" opacity="0.2"/>
+  </g>
+</svg>
