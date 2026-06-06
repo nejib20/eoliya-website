@@ -1,5 +1,7 @@
 /**
- * Rate Limiting Utility
+ * Rate Limiting Utility (en mémoire) — utilisé par les routes internes
+ * (chat, calendar). Le formulaire de contact utilise le limiteur durable
+ * dédié dans `contact-rate-limit.ts`.
  * @author Nejib Aloui <nejib20@gmail.com>
  */
 
@@ -10,25 +12,16 @@ interface RateLimitEntry {
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
 
-/**
- * Rate limit configuration
- */
 interface RateLimitConfig {
-  max: number; // Maximum requests
-  window: number; // Time window in milliseconds
+  max: number;
+  window: number;
 }
 
-/**
- * Default rate limit: 10 requests per minute
- */
 const DEFAULT_CONFIG: RateLimitConfig = {
   max: parseInt(process.env.RATE_LIMIT_MAX || '10', 10),
   window: parseInt(process.env.RATE_LIMIT_WINDOW || '60000', 10),
 };
 
-/**
- * Check if request is rate limited
- */
 export function isRateLimited(
   identifier: string,
   config: RateLimitConfig = DEFAULT_CONFIG
@@ -36,41 +29,28 @@ export function isRateLimited(
   const now = Date.now();
   const entry = rateLimitStore.get(identifier);
 
-  // Clean up expired entries
   if (entry && now > entry.resetTime) {
     rateLimitStore.delete(identifier);
   }
 
-  // Get or create entry
   const current = rateLimitStore.get(identifier) || {
     count: 0,
     resetTime: now + config.window,
   };
 
-  // Increment count
   current.count += 1;
   rateLimitStore.set(identifier, current);
 
   const remaining = Math.max(0, config.max - current.count);
   const limited = current.count > config.max;
 
-  return {
-    limited,
-    remaining,
-    resetTime: current.resetTime,
-  };
+  return { limited, remaining, resetTime: current.resetTime };
 }
 
-/**
- * Reset rate limit for identifier
- */
 export function resetRateLimit(identifier: string): void {
   rateLimitStore.delete(identifier);
 }
 
-/**
- * Get rate limit headers
- */
 export function getRateLimitHeaders(
   remaining: number,
   resetTime: number
@@ -82,9 +62,6 @@ export function getRateLimitHeaders(
   };
 }
 
-/**
- * Clean up expired entries periodically
- */
 if (typeof setInterval !== 'undefined') {
   setInterval(() => {
     const now = Date.now();
@@ -93,19 +70,15 @@ if (typeof setInterval !== 'undefined') {
         rateLimitStore.delete(key);
       }
     }
-  }, 60000); // Clean up every minute
+  }, 60000);
 }
 
-/**
- * Get client identifier from request
- */
+/** IP client via en-têtes Vercel (anti-spoof). */
 export function getClientIdentifier(request: Request): string {
-  // Try to get IP from various headers
-  const forwardedFor = request.headers.get('x-forwarded-for');
-  const realIp = request.headers.get('x-real-ip');
-  const cfConnectingIp = request.headers.get('cf-connecting-ip');
-
-  const ip = cfConnectingIp || realIp || forwardedFor?.split(',')[0] || 'unknown';
-
+  const ip =
+    request.headers.get('x-vercel-forwarded-for') ||
+    request.headers.get('x-real-ip') ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown';
   return ip.trim();
 }

@@ -1,67 +1,100 @@
 /**
- * Contact Form API Route
+ * Contact Form API Route — défense en profondeur.
+ * Ordre des couches : Origin → honeypot → time-trap → rate-limit → Turnstile → zod → envoi.
+ * Chaque couche externe (Turnstile, time-trap, Upstash) s'active uniquement si configurée.
  * @author Nejib Aloui <nejib20@gmail.com>
  */
-
 import { NextRequest, NextResponse } from 'next/server';
+import { waitUntil } from '@vercel/functions';
 import { sendContactEmail } from '@/lib/email';
 import { contactFormSchema, validateData } from '@/lib/validation';
-import { isRateLimited, getClientIdentifier, getRateLimitHeaders } from '@/lib/rate-limit';
+import { getClientIdentifier } from '@/lib/rate-limit';
+import { checkRateLimit, getContactRateLimitHeaders as getRateLimitHeaders } from '@/lib/contact-rate-limit';
+import { verifyTurnstile, turnstileConfigured } from '@/lib/verifyTurnstile';
+import { verifyFormToken } from '@/lib/formToken';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-/**
- * POST /api/contact - Send contact form email
- */
+const ALLOWED_HOST = 'eoliya.com';
+const isProd = process.env.NODE_ENV === 'production';
+
+// 200 factice : ne pas signaler aux bots qu'ils ont été détectés
+function fakeOk() {
+  return NextResponse.json(
+    { success: true, message: 'Votre message a été envoyé avec succès.' },
+    { status: 200 }
+  );
+}
+
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting - 3 submissions per hour per IP
-    const clientId = getClientIdentifier(request);
-    const rateLimit = isRateLimited(`contact:${clientId}`, { max: 3, window: 3600000 });
-
-    if (rateLimit.limited) {
-      return NextResponse.json(
-        {
-          error: 'Trop de soumissions. Veuillez réessayer dans une heure.',
-        },
-        {
-          status: 429,
-          headers: getRateLimitHeaders(rateLimit.remaining, rateLimit.resetTime),
-        }
-      );
+    // 0. Anti-CSRF : un POST de ce formulaire est forcément same-origin
+    const origin = request.headers.get('origin');
+    if (isProd && origin && !origin.endsWith(ALLOWED_HOST)) {
+      return NextResponse.json({ error: 'Origine invalide' }, { status: 403 });
+    }
+    if (!request.headers.get('content-type')?.includes('application/json')) {
+      return NextResponse.json({ error: 'Type de contenu invalide' }, { status: 415 });
     }
 
-    // Parse and validate request body
     const body = await request.json();
-    const validation = validateData(contactFormSchema, body);
+    const clientId = getClientIdentifier(request);
 
-    if (!validation.success) {
+    // 1. Honeypot — 200 factice
+    if (body.website) {
+      console.warn('[contact] honeypot déclenché:', clientId);
+      return fakeOk();
+    }
+
+    // 2. Time-trap (HMAC) — appliqué seulement si FORM_TS_SECRET configuré
+    const dwell = verifyFormToken(body.formToken);
+    if (dwell === 'too_fast') {
+      console.warn('[contact] time-trap too_fast:', clientId);
+      return fakeOk();
+    }
+    if (dwell === 'expired' || dwell === 'invalid') {
       return NextResponse.json(
-        {
-          error: 'Données invalides',
-          errors: validation.errors,
-        },
+        { error: 'Session expirée. Veuillez recharger la page et réessayer.' },
         { status: 400 }
       );
     }
 
-    const data = validation.data;
-
-    // Check honeypot field
-    if (data.website) {
-      console.warn('Spam attempt detected from:', clientId);
-      // Return success to not alert spammer
+    // 3. Rate-limit durable (Upstash si configuré, sinon mémoire)
+    const rl = await checkRateLimit(`contact:${clientId}`);
+    if (rl.pending) waitUntil(rl.pending);
+    if (rl.limited) {
       return NextResponse.json(
-        {
-          success: true,
-          message: 'Message envoyé avec succès',
-        },
-        { status: 200 }
+        { error: 'Trop de soumissions. Veuillez réessayer dans une heure.' },
+        { status: 429, headers: getRateLimitHeaders(rl) }
       );
     }
 
-    // Send email
+    // 4. Turnstile — appliqué seulement si TURNSTILE_SECRET_KEY configuré
+    if (turnstileConfigured) {
+      const ts = await verifyTurnstile(body.turnstileToken, clientId);
+      const actionOk = !ts.action || ts.action === 'contact';
+      const hostOk = !isProd || !ts.hostname || ts.hostname.endsWith(ALLOWED_HOST);
+      if (!ts.ok || !actionOk || !hostOk) {
+        console.warn('[contact] turnstile échec:', clientId, ts.codes.join(','));
+        return NextResponse.json(
+          { error: 'Vérification anti-bot échouée. Veuillez réessayer.' },
+          { status: 400, headers: getRateLimitHeaders(rl) }
+        );
+      }
+    }
+
+    // 5. Validation zod
+    const validation = validateData(contactFormSchema, body);
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: 'Données invalides', errors: validation.errors },
+        { status: 400, headers: getRateLimitHeaders(rl) }
+      );
+    }
+    const data = validation.data;
+
+    // 6. Envoi
     const emailId = await sendContactEmail({
       name: data.name,
       email: data.email,
@@ -71,25 +104,19 @@ export async function POST(request: NextRequest) {
       message: data.message,
     });
 
-    console.log('Contact email sent:', { emailId, from: data.email, subject: data.subject });
-
     return NextResponse.json(
       {
         success: true,
         message: 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.',
         emailId,
       },
-      {
-        status: 200,
-        headers: getRateLimitHeaders(rateLimit.remaining - 1, rateLimit.resetTime),
-      }
+      { status: 200, headers: getRateLimitHeaders(rl) }
     );
   } catch (error) {
     console.error('Error sending contact email:', error);
-
     return NextResponse.json(
       {
-        error: 'Erreur lors de l\'envoi du message',
+        error: "Erreur lors de l'envoi du message",
         message: 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par téléphone.',
       },
       { status: 500 }
@@ -97,14 +124,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * OPTIONS - CORS preflight
- */
 export async function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': `https://${ALLOWED_HOST}`,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     },

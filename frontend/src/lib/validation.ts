@@ -51,6 +51,10 @@ export const contactFormSchema = z.object({
   acceptPrivacy: z
     .boolean()
     .refine((val) => val === true, 'Vous devez accepter la politique de confidentialité'),
+
+  // Anti-bot (optionnels : appliqués côté serveur seulement si configurés)
+  turnstileToken: z.string().max(2048).optional().or(z.literal('')),
+  formToken: z.string().max(256).optional().or(z.literal('')),
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

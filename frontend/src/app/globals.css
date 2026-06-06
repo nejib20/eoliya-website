@@ -879,6 +879,24 @@
 .contact-page .cform .btn:hover { background: transparent; color: var(--ink); }
 @media (max-width: 900px) { .contact-page .grid { grid-template-columns: 1fr; } }
 
+/* Honeypot anti-spam : invisible, off-screen, sans display:none */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Emplacement du widget Turnstile (vide si désactivé) */
+.cf-turnstile-slot:not(:empty) { margin-top: 22px; }
+/* Message d'état du formulaire */
+.cform-msg { margin-top: 18px; font-size: 14px; line-height: 1.5; }
+.cform-msg--error { color: #9b2c2c; }
+.cform .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
 /* Halo radial laiton sur la bande CTA (réf pages.css) */
 .cta-band { position: relative; overflow: hidden; }
 .cta-band::after { content:""; position:absolute; right:-8%; top:-60%; width:55%; height:220%; background: radial-gradient(closest-side, color-mix(in srgb, var(--light) 30%, transparent), transparent 70%); pointer-events:none; z-index:0; }
