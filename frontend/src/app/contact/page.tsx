@@ -69,7 +69,7 @@ export default function ContactPage() {
               </a>
               <iframe
                 title="Carte — 131 Boulevard Pereire, 75017 Paris"
-                src="https://maps.google.com/maps?q=131%20Boulevard%20Pereire%2075017%20Paris&z=16&output=embed"
+                src="https://www.google.com/maps?q=131%20Boulevard%20Pereire%2075017%20Paris&z=16&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
