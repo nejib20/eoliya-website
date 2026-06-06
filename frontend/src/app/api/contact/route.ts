@@ -17,7 +17,19 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const ALLOWED_HOST = 'eoliya.com';
+const ALLOWED_HOSTS = new Set(['eoliya.com', 'www.eoliya.com']);
 const isProd = process.env.NODE_ENV === 'production';
+
+/** Hostname exact (anti-bypass de suffixe non ancré, ex. « noteoliya.com »). */
+function hostOf(value: string | undefined | null): string | null {
+  if (!value) return null;
+  try {
+    return new URL(value).hostname.toLowerCase().replace(/\.$/, '');
+  } catch {
+    // value peut déjà être un hostname nu (cas du hostname Turnstile)
+    return value.toLowerCase().replace(/\.$/, '');
+  }
+}
 
 // 200 factice : ne pas signaler aux bots qu'ils ont été détectés
 function fakeOk() {
@@ -29,10 +41,14 @@ function fakeOk() {
 
 export async function POST(request: NextRequest) {
   try {
-    // 0. Anti-CSRF : un POST de ce formulaire est forcément same-origin
+    // 0. Anti-CSRF : un POST de ce formulaire est forcément same-origin.
+    //    Comparaison EXACTE du hostname (pas de endsWith, qui accepterait « noteoliya.com »).
     const origin = request.headers.get('origin');
-    if (isProd && origin && !origin.endsWith(ALLOWED_HOST)) {
-      return NextResponse.json({ error: 'Origine invalide' }, { status: 403 });
+    if (isProd && origin) {
+      const oh = hostOf(origin);
+      if (!oh || !ALLOWED_HOSTS.has(oh)) {
+        return NextResponse.json({ error: 'Origine invalide' }, { status: 403 });
+      }
     }
     if (!request.headers.get('content-type')?.includes('application/json')) {
       return NextResponse.json({ error: 'Type de contenu invalide' }, { status: 415 });
@@ -74,7 +90,8 @@ export async function POST(request: NextRequest) {
     if (turnstileConfigured) {
       const ts = await verifyTurnstile(body.turnstileToken, clientId);
       const actionOk = !ts.action || ts.action === 'contact';
-      const hostOk = !isProd || !ts.hostname || ts.hostname.endsWith(ALLOWED_HOST);
+      const tsHost = hostOf(ts.hostname);
+      const hostOk = !isProd || !tsHost || ALLOWED_HOSTS.has(tsHost);
       if (!ts.ok || !actionOk || !hostOk) {
         console.warn('[contact] turnstile échec:', clientId, ts.codes.join(','));
         return NextResponse.json(
