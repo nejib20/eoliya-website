@@ -209,10 +209,16 @@ export async function sendContactEmail(data: ContactEmailData): Promise<string> 
     const resend = getResendClient();
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'contact@eoliya.com';
     const toEmail = process.env.CONTACT_EMAIL || 'contact@eoliya.com';
+    // Copie(s) — ex. CONTACT_CC="nejib20@gmail.com" (séparées par des virgules)
+    const ccList = (process.env.CONTACT_CC || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
 
     const response = await resend.emails.send({
       from: `EOLIYA Contact <${fromEmail}>`,
       to: [toEmail],
+      ...(ccList.length ? { cc: ccList } : {}),
       reply_to: data.email,
       subject: `[Contact Web] ${data.subject}`,
       html: generateContactEmailHTML(data),
