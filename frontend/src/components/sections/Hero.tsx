@@ -156,11 +156,11 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative border-b border-line overflow-hidden isolate">
-      <div className="min-h-[clamp(600px,92vh,1000px)] max-md:min-h-[72svh] flex items-stretch bg-night">
+      <div className="min-h-[clamp(600px,92vh,1000px)] max-md:min-h-0 flex items-stretch max-md:flex-col bg-night">
         {/* Video Background */}
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none max-md:static max-md:inset-auto max-md:h-auto max-md:aspect-video max-md:object-contain"
           autoPlay
           loop
           muted
@@ -173,7 +173,7 @@ export const Hero: React.FC = () => {
 
         {/* Gradient Veil */}
         <div
-          className="absolute inset-0 z-[1] pointer-events-none"
+          className="absolute inset-0 z-[1] pointer-events-none max-md:hidden"
           style={{
             background: `
               linear-gradient(90deg,
@@ -188,7 +188,7 @@ export const Hero: React.FC = () => {
         />
 
         {/* Content */}
-        <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] max-md:pt-[clamp(84px,12vh,110px)] flex flex-col justify-end text-night-ink">
+        <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] max-md:pt-[clamp(28px,6vw,44px)] flex flex-col justify-end text-night-ink">
           <div>
             <div className="eyebrow text-night-muted rv">
               <b className="text-laiton-light">00</b> &nbsp;Ingénierie du bâtiment

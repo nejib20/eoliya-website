@@ -745,19 +745,15 @@
 #renovation-signature h2 { text-shadow: 0 2px 4px rgba(15,26,21,0.35), 0 10px 40px rgba(15,26,21,0.50); }
 #renovation-signature .l-sub { text-shadow: 0 1px 2px rgba(15,26,21,0.45), 0 4px 22px rgba(15,26,21,0.50); }
 
-/* Mobile : l'image Haussmann (claire) exige un voile plus fort que sur desktop
-   pour garder le texte lisible, sans toucher au rendu desktop (jugé parfait). */
+/* Mobile : on montre les images éditoriales EN ENTIER (non rognées) et SANS
+   voile sombre. L'image devient une bannière dans le flux, le texte passe
+   dessous sur le fond sombre de la section (lisible sans assombrir l'image). */
 @media (max-width: 768px) {
-  #renovation-signature .veil {
-    background:
-      linear-gradient(180deg, rgba(12,20,16,0.58) 0%, rgba(12,20,16,0.42) 42%, rgba(12,20,16,0.50) 70%, rgba(12,20,16,0.70) 100%),
-      linear-gradient(100deg, rgba(12,20,16,0.45) 0%, rgba(12,20,16,0.20) 60%, rgba(12,20,16,0.08) 100%);
-  }
-  #renovation-signature .eyebrow,
-  #renovation-signature h2,
-  #renovation-signature .l-sub {
-    text-shadow: 0 1px 3px rgba(8,12,10,0.6), 0 8px 30px rgba(8,12,10,0.65);
-  }
+  .lumiere .bg { position: static; }
+  .lumiere .bg img { height: auto; }   /* image complète, ratio naturel, non rognée */
+  .lumiere .veil { display: none; }     /* on retire le filtre sombre */
+  .lumiere .spot { display: none; }     /* pas de spotlight curseur au tactile */
+  .lumiere .inner { padding-block: clamp(34px, 7vw, 56px); }
 }
 
 /* Le spotlight suit le curseur : sans souris (tactile), l'invitation n'a aucun sens. */
