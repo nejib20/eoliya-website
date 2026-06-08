@@ -666,15 +666,9 @@
   }
 }
 
-@media (max-width: 640px) {
-  .about-stats .stat-item {
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-  .about-stats .stat-item:last-child {
-    border-bottom: none;
-  }
-}
+/* (Mobile <=640 : on garde la grille 2 colonnes des regles @1024, qui produisent
+   deja des filets corrects. L'ancien bloc @640 stylait pour 1 colonne — alors que
+   la grille reste a 2 colonnes — et cassait les filets : supprime.) */
 
 /* ===== About Bureau Section ===== */
 .about-bureau {
@@ -819,6 +813,16 @@
 .quote-band .by .rl { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,239,233,0.72); display: flex; align-items: center; gap: 12px; }
 .quote-band .by .rl::before { content:""; width: 26px; height: 1px; background: var(--light-2); display: inline-block; }
 
+/* Mobile : QuoteBand = meme traitement que Lumiere/Renovation — image editoriale
+   EN ENTIER (banniere non rognee) + voile retire ; le texte passe dessous sur le
+   fond sombre var(--night) de la section (lisible sans assombrir l'image). */
+@media (max-width: 768px) {
+  .quote-band { padding-block: 0; }
+  .quote-band .quote-bg { position: static; height: auto; }
+  .quote-band .veil { display: none; }
+  .quote-band .wrap { padding-block: clamp(34px, 7vw, 56px); }
+}
+
 /* Contact (formulaire à filets, fiche technique) */
 .contact { border-top: 1px solid var(--line); background: var(--card); color: var(--ink); }
 .contact .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,100px); padding-block: clamp(72px,9vw,140px); }
@@ -858,6 +862,14 @@
 .page-hero .hero-meta .m .n { font-family: var(--font-display); font-weight: 500; font-size: clamp(30px,3vw,42px); letter-spacing: -0.02em; color: var(--ink); }
 .page-hero .hero-meta .m .n small { font-size: 0.5em; color: var(--light-deep); }
 .page-hero .hero-meta .m .l { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+/* Mobile : la barre de metriques (flex-wrap) laissait des filets verticaux
+   orphelins au passage a la ligne — on l'empile en colonne avec des filets
+   horizontaux sous ~560px. */
+@media (max-width: 560px) {
+  .page-hero .hero-meta { flex-direction: column; }
+  .page-hero .hero-meta .m { padding-right: 0; margin-right: 0; border-right: none; border-bottom: 1px solid var(--line); }
+  .page-hero .hero-meta .m:last-child { border-bottom: none; }
+}
 
 .svc { border-top: 1px solid var(--line); }
 .svc-block { scroll-margin-top: 96px; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,5vw,90px); padding-block: clamp(56px,7vw,110px); align-items: center; border-bottom: 1px solid var(--line); }
@@ -877,8 +889,10 @@
 .svc-visual .tagnote { position: absolute; left: 16px; bottom: 14px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--night-ink); text-shadow: 0 1px 6px rgba(0,0,0,0.55); }
 @media (max-width: 900px) {
   .svc-block { grid-template-columns: 1fr; gap: 32px; }
-  .svc-block:nth-child(even) .svc-visual { order: 0; }
-  .svc-visual { order: -1; }
+  /* Mobile : image TOUJOURS au-dessus du texte pour chaque bloc (cohérence).
+     On force aussi les blocs pairs (qui alternent en desktop) à -1. */
+  .svc-block .svc-visual,
+  .svc-block:nth-child(even) .svc-visual { order: -1; }
 }
 
 /* ===== Page Contact — carte + fiche + garantie (port pages.css) ===== */
