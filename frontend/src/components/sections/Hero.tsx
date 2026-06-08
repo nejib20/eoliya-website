@@ -72,7 +72,7 @@ const AnimatedStat: React.FC<{ stat: StatItem; index: number; hasStarted: boolea
 
   return (
     <div
-      className="py-[26px] pr-[clamp(28px,3vw,52px)] mr-[clamp(28px,3vw,52px)] border-r border-night-ink/[0.18] last:border-r-0 last:mr-0 last:pr-0 max-md:border-r-0 max-md:border-b max-md:mr-0 max-md:pr-0 max-md:last:border-b-0"
+      className="py-[26px] max-md:py-[15px] pr-[clamp(28px,3vw,52px)] mr-[clamp(28px,3vw,52px)] border-r border-night-ink/[0.18] last:border-r-0 last:mr-0 last:pr-0 max-md:border-r-0 max-md:border-b max-md:mr-0 max-md:pr-0 max-md:last:border-b-0"
     >
       <div className="font-display font-medium text-[clamp(34px,3.4vw,48px)] leading-none tracking-[-0.02em] text-night-ink">
         {displayValue}
@@ -95,7 +95,14 @@ export const Hero: React.FC = () => {
     const video = videoRef.current;
     if (!video) return;
 
+    // iOS-safe: apply muted imperatively. React doesn't always reflect the
+    // `muted` attribute to the DOM, and an un-muted video is blocked from
+    // autoplaying on iOS (the #1 cause of "plays briefly then stops").
+    video.muted = true;
+    video.defaultMuted = true;
+
     const kick = () => {
+      video.muted = true;
       const p = video.play();
       if (p && p.catch) p.catch(() => {});
     };
@@ -103,6 +110,12 @@ export const Hero: React.FC = () => {
     if (video.readyState >= 2) kick();
     video.addEventListener('loadeddata', kick);
     video.addEventListener('canplay', kick);
+    // Robust infinite loop: if iOS pauses the video (buffering stall, etc.),
+    // resume it. With `loop` set, `ended` normally never fires — we cover it too.
+    // In Low-Power Mode iOS refuses play() (promise rejects, caught) and the
+    // poster stays visible, which is the correct graceful fallback.
+    video.addEventListener('pause', kick);
+    video.addEventListener('ended', kick);
 
     const handleVisibility = () => {
       if (!document.hidden) kick();
@@ -113,6 +126,8 @@ export const Hero: React.FC = () => {
     return () => {
       video.removeEventListener('loadeddata', kick);
       video.removeEventListener('canplay', kick);
+      video.removeEventListener('pause', kick);
+      video.removeEventListener('ended', kick);
       document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('pageshow', kick);
     };
@@ -141,7 +156,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative border-b border-line overflow-hidden isolate">
-      <div className="min-h-[clamp(600px,92vh,1000px)] flex items-stretch bg-night">
+      <div className="min-h-[clamp(600px,92vh,1000px)] max-md:min-h-[72svh] flex items-stretch bg-night">
         {/* Video Background */}
         <video
           ref={videoRef}
@@ -150,7 +165,7 @@ export const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/images/hero-poster.jpg"
         >
           <source src="/videos/eoliya-hero-loop.mp4" type="video/mp4" />
@@ -173,7 +188,7 @@ export const Hero: React.FC = () => {
         />
 
         {/* Content */}
-        <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] flex flex-col justify-end text-night-ink">
+        <div className="relative z-[2] w-full max-w-content mx-auto px-gutter py-[clamp(120px,16vh,200px)] pb-[clamp(36px,5vw,64px)] max-md:pt-[clamp(84px,12vh,110px)] flex flex-col justify-end text-night-ink">
           <div>
             <div className="eyebrow text-night-muted rv">
               <b className="text-laiton-light">00</b> &nbsp;Ingénierie du bâtiment
@@ -200,7 +215,7 @@ export const Hero: React.FC = () => {
           {/* Stats Ledger */}
           <div
             ref={statsRef}
-            className="grid grid-cols-3 max-md:grid-cols-1 gap-0 border-t border-night-ink/[0.18] mt-[clamp(40px,5vw,64px)]"
+            className="grid grid-cols-3 max-md:grid-cols-1 gap-0 border-t border-night-ink/[0.18] mt-[clamp(40px,5vw,64px)] max-md:mt-8"
           >
             {stats.map((stat, index) => (
               <AnimatedStat
@@ -213,7 +228,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Tag */}
-          <div className="mt-[clamp(32px,4vw,52px)] font-mono text-[11px] tracking-[0.14em] uppercase text-night-ink/[0.62] flex items-center gap-3">
+          <div className="mt-[clamp(32px,4vw,52px)] max-md:mt-7 font-mono text-[11px] tracking-[0.14em] uppercase text-night-ink/[0.62] flex items-center gap-3">
             <span className="w-[26px] h-px bg-laiton-light inline-block" />
             Hall tertiaire, mise en lumière EOLIYA
           </div>
